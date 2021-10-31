@@ -16,6 +16,10 @@ const ironhack_blackJack = {
     playerScoreCardsInst:undefined,
     playerAmount:1000,
     playerAmountTotalInst:undefined,
+    handDealerCards:[],
+    handDealerCardsInst:undefined,
+    handPlayerCards:[],
+    handPlayerCardsInst:undefined,
    
   
     init() {
@@ -55,6 +59,8 @@ const ironhack_blackJack = {
       this.createDealerScoreCards();
       this.createPlayerScoreCards();
       this.createPlayerAmountTotal();
+      this.createHandDealerCards();
+      this.createHandPlayerCards();
     },
   
     createBackground() {
@@ -69,11 +75,19 @@ const ironhack_blackJack = {
     createPlayerAmountTotal() {
       this.playerAmountTotalInst = new PlayerAmount(this.ctx, 100, 550);
     },
+    createHandDealerCards(){
+      this.handDealerInst = [];
+    },
+    createHandPlayerCards(){
+      this.handPlayerInst = [];
+    },
     drawAll() {
       this.drawBackground();
       this.drawDealerScoreCards();
       this.drawPlayerScoreCards();
       this.drawPlayerAmountTotal();
+      this.drawHandDealerCards();
+      this.drawHandPlayerCards();
     },
   
     drawBackground() {
@@ -88,6 +102,13 @@ const ironhack_blackJack = {
     drawPlayerAmountTotal() {
       this.playerAmountTotalInst.draw(this.playerAmount);
     },
+    drawHandDealerCards() {
+      
+    },
+    drawHandPlayerCards(){
+
+    },
+    
     setListeners() { //Aqui debemos poner los eventos onClick de los botones del canvas
       document.onClick = e => {
         // console.log("La tecla: ", e.key)
