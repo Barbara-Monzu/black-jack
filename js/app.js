@@ -61,7 +61,7 @@ const ironhack_blackJack = {
       this.background = new Background(this.ctx, 0, 0, this.canvasSize.width, this.canvasSize.height, "bgTapiz.svg");
     },
     createDealerScoreCards() {
-      this.dealerScoreCardsInst = new DealerScore(this.ctx, 100, 500);
+      this.dealerScoreCardsInst = new DealerScore(this.ctx, 100, 100);
     },
     createPlayerScoreCards() {
       this.playerScoreCardsInst = new PlayerScore(this.ctx, 100, 500);
