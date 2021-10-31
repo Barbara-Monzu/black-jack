@@ -1,0 +1,78 @@
+<!doctype html>
+<html class="no-js" lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <title>IronHack Black Jack</title>
+  <meta name="description" content="Bárbara Monzú & Fernando Cardona Black Jack Project at IronHack BootCamp 2021">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <link rel="manifest" href="site.webmanifest">
+  <link rel="apple-touch-icon" href="icon.png">
+  <!-- Place favicon.ico in the root directory -->
+
+  <link rel="stylesheet" href="css/normalize.css">
+  <link rel="stylesheet" href="css/fonts/fonts.css">
+  <link rel="stylesheet" href="css/main.css">
+  <link rel="stylesheet" href="css/responsive.css">
+
+</head>
+
+<body>
+  <!--[if IE]>
+    <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience and security.</p>
+  <![endif]-->
+
+  <!-- Add your site or application content here -->
+
+  <section id="sectionLanding" class="sect-landing">
+    <h2>Welcome</h2>
+    <h1>IRONHACK BLACK JACK</h1>
+    <div class="img-landing"></div>
+    <div class="footer-interaction">
+      <div class="cont-buttons">
+        <button id="btnLess" class="btn yearsLess">Less 18 years</button>
+        <button id="btnOver" class="btn yearsOver">Over 18 years</button>
+        <button id="btnStart" class="btn start-game">Start Game</button>
+        <h3 id="txtLess" class="contYearsLess">
+            We are sorry you are not alaud to play this game, <br>
+            back when you are over 18 years!
+        </h3>
+      </div>
+    </div>
+    
+    
+  </section> 
+  
+  <section id="sectionGame" class="section-canvas">
+    <div class="form-player">
+      <form id="form-Nickname" name="form1" action="">
+        <label for="">Player Nickname: </label>
+        <input id="input-Nick" type="text" name="fname" placeholder="Nickname"><br>
+      </form>
+      <button id="nickForm" class="btn form-submit">Submint</button>
+    </div> 
+    <canvas id="canvasGame"></canvas> 
+  </section>
+  <section id="sectionGood-bye" class="sect-bye-bye">
+    <h2>Good Bye</h2>
+    <p>
+      Lorem ipsum dolor sit amet consectetur, adipisicing elit. Sapiente tenetur necessitatibus laboriosam eum provident nostrum architecto quam. Voluptate maxime fuga doloremque nihil ab dolores atque aut! Vel rem quod optio! Lorem ipsum dolor sit, amet consectetur adipisicing elit. Itaque, aut. Omnis dicta voluptate fugit commodi assumenda dolores vero, molestiae quos accusantium quas iure veniam perferendis numquam eveniet saepe natus! Maiores.
+    </p>
+  </section>
+  
+  <script src="js/vendor/modernizr-3.7.1.min.js"></script>
+  <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+  <script>window.jQuery || document.write('<script src="js/vendor/jquery-3.3.1.min.js"><\/script>')</script>
+  <script src="js/vendor/gsap.min.js"></script>
+  <script src="js/playerAmount.js"></script>
+  <script src="js/playerScore.js"></script>
+  <script src="js/dealerScore.js"></script>
+  <script src="js/background.js"></script>
+  <script src="js/Class.js"></script>
+  <script src="js/app.js"></script><!-- Funcioninicio del juego-->
+  <script src="js/index.js"></script><!-- Funcion inicio del juego-->
+  <script src="js/scripts.js"></script><!-- Funciones de las pantalla del DOM-->
+</body>
+
+</html>
