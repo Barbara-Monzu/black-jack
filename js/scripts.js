@@ -14,19 +14,19 @@ const content3 = document.getElementById('sectionGood-bye');
   
     // Agregamos un addevent lisener para escucharclick btn "yearsLess", si eres mayor de edad. 
     document.getElementById('btnLess').addEventListener('click', event => {
-        console.log('Escucho el evento btnLess');
+        //console.log('Escucho el evento btnLess');
         yearsLess();
     });
     document.getElementById('btnOver').addEventListener('click', event => {
-        console.log('Escucho el evento btnOver');
+        //console.log('Escucho el evento btnOver');
        yearsOver();
     });
     document.getElementById('btnStart').addEventListener('click', event => {
-        console.log('Escucho el evento startGame');
+        //console.log('Escucho el evento startGame');
         startGame();
     });
     
-    function yearsLess() { console.log('Escucho el evento btnLess');
+    function yearsLess() { //console.log('Escucho el evento btnLess');
         //Eliminamos btn "YearsLess y Btn YearsOver" mediante las propiedades opacity y display block
         btnLess.style.display = "none"; 
         btnLess.style.opacity = "0";
@@ -64,7 +64,7 @@ const content3 = document.getElementById('sectionGood-bye');
 
     }
     // Agregamos un addevent lisener para escucharclick btn "start-game" iniciar partida. 
-    function startGame() { console.log('Escucho el evento startGame');
+    function startGame() { //console.log('Escucho el evento startGame');
     //Llamamos a la funcion "goSectionCanvas()" para cambiar a la pantalla de juego y iniciar "ironhack_BlackJAck.init()" mediante el callback de la animacion "goSectionCanvas()""
         goSectionCanvas();
 
@@ -139,13 +139,55 @@ function formularioNick(){
     gsap.timeline().to(contForm, .6 ,{opacity:0,display:"none"});
 }
     
-    
+//////LANDING TEXT ANIMATION///////  
+ 
 
+const splitText = (selector) => {
+    const elem = document.querySelector(selector);
+    const text = elem.innerText;
+    const chars = text.split("");
+    const charsContainer = document.createElement("div");
+    const charsArray = [];
+  
+    charsContainer.style.position = "relative";
+    charsContainer.style.display = "inline-block";
+  
+    chars.forEach((char) => {
+      const charContainer = document.createElement("div");
+  
+      charContainer.style.position = "relative";
+      charContainer.style.display = "inline-block";
+      charContainer.innerText = char;
+      charsContainer.appendChild(charContainer);
+  
+      charsArray.push(charContainer);
+    });
+    // remove current text
+    elem.innerHTML = "";
+    // append new structure
+    elem.appendChild(charsContainer);
+  
+    return charsArray;
+  };
+  
+  const animate = function (text) {
+    const chars = splitText("h1");
+    return gsap.from(chars, {
+      duration: 0.2,
+      y: 100,
+      opacity: 0,
+      stagger: 0.1,
+      delay: 1
+    });
+  };
+  
+  animate("h1");
+  
 
 
 
 //Llamada a cargar/ ejecutar App ironhack_blackJack 
-ironhack_blackJack.init(); 
+//ironhack_blackJack.init(); ////
 // function startTAbleGame(){
 //     ironhack_blackJack.init();
 // }

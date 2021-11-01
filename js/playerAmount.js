@@ -5,18 +5,18 @@ class PlayerAmount {
         x: posX,
         y: posY
       }
-      this.playerAmount = 1000;
+      //this.playerAmount = 1000;
     }
   
     draw(playerAmountTotalInst) {
       this.ctx.font = '48px roboto';
       this.ctx.fillStyle =  'red';
-      this.ctx.fillText(this.playerAmount + "€ Amount.", this.pos.x, this.pos.y);
+      this.ctx.fillText(playerAmountTotalInst + "€ Amount.", this.pos.x, this.pos.y);
   
-      this.sumPlayerCards(playerAmountTotalInst);
+      //this.sumPlayerCards(playerAmountTotalInst);
     }
   
-    sumPlayerCards(playerAmountTotalInst) {
-      this.playerAmount += playerAmountTotalInst; 
-    }
+    // sumPlayerCards(playerAmountTotalInst) {
+    //   this.playerAmount += playerAmountTotalInst; 
+    // }
   }

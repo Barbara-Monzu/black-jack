@@ -372,6 +372,6 @@ function SuffleDeck(deckCards){
       deckCards[i] = deckCards[j];
       deckCards[j] = temp;
     }
-    console.log(deckCards);
+    //console.log(deckCards);
 }
 SuffleDeck(deckCards);

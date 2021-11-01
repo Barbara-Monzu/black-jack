@@ -26,7 +26,9 @@ const ironhack_blackJack = {
       this.setContext();
       this.setDimensions();
       this.createAll();
-       
+      this.calculateAll();
+
+      
       this.setListeners();
       this.start(); 
     },
@@ -47,8 +49,9 @@ const ironhack_blackJack = {
     },
   
     start() {//console.log('Hemos entrado a start');
-      
-      this.drawAll();
+      setInterval( ()=> {
+        this.drawAll();
+      }, 1000/30)
       
     if (this.isAmountPlayer() === 0) {
         this.gameOver();
@@ -76,10 +79,10 @@ const ironhack_blackJack = {
       this.playerAmountTotalInst = new PlayerAmount(this.ctx, 100, 550);
     },
     createHandDealerCards(){
-      this.handDealerInst = [];
+      this.handDealerInst = new HandDealerCards(this.ctx, this.canvasSize.width/2 - 50, 110, 150, 220);
     },
     createHandPlayerCards(){
-      this.handPlayerInst = [];
+      this.handPlayerInst = new HandPlayerCards(this.ctx, this.canvasSize.width/2 - 50, 820, 150, 220);
     },
     drawAll() {
       this.drawBackground();
@@ -88,6 +91,7 @@ const ironhack_blackJack = {
       this.drawPlayerAmountTotal();
       this.drawHandDealerCards();
       this.drawHandPlayerCards();
+      this.handPlayerInst.drawNewPlayerCard();
     },
   
     drawBackground() {
@@ -98,35 +102,46 @@ const ironhack_blackJack = {
     },
     drawPlayerScoreCards() {
       this.playerScoreCardsInst.draw(this.playerScoreCards);
+     
     },
     drawPlayerAmountTotal() {
       this.playerAmountTotalInst.draw(this.playerAmount);
     },
     drawHandDealerCards() {
-      
+      this.handDealerInst.draw();
     },
     drawHandPlayerCards(){
-
+      this.handPlayerInst.draw();
+      
+    },
+    calculateAll() {
+      this.playerScoreCards = this.handPlayerInst.calculateHandPlayer();
+      this.dealerScoreCards = this.handDealerInst.calculateHandDealer();
     },
     
     setListeners() { //Aqui debemos poner los eventos onClick de los botones del canvas
-      document.onClick = e => {
-        // console.log("La tecla: ", e.key)
+      document.addEventListener('keydown', (event) => { //evento 'hit pedir carta'
+         
+        if(event.key === ' '){
+
+          this.handPlayerInst.hit();
+          console.log(this.deckCards)
+        }
         
-        // //Versión con operador ternario
-        // e.key === 'ArrowLeft' ? this.ball.moveLeft() : null
-        // e.key === 'ArrowRight' ? this.ball.moveRight() : null
-      }
+      });
     },
   
     clearScreen() {
       this.ctx.clearRect(0, 0, this.canvasSize.width, this.canvasSize.height);
     },
+
     isAmountPlayer() {
         //Check amount player
     },
+
     gameOver() {
         //Llamamos a la funcion goSectionGoodBye() para cambiar a la pantalla de cierre.
         goSectionGoodBye();
     }
+
   }

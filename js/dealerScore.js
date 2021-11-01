@@ -5,18 +5,15 @@ class DealerScore {
         x: posX,
         y: posY
       }
-      this.dealerScoreCards = 0;
+  
     }
   
     draw(dealerScoreCardsInst) {
       this.ctx.font = '48px roboto';
       this.ctx.fillStyle =  'white';
-      this.ctx.fillText(this.dealerScoreCards + " hand.", this.pos.x, this.pos.y);
+      this.ctx.fillText(dealerScoreCardsInst + " hand.", this.pos.x, this.pos.y);
   
-      this.sumDealerCards(dealerScoreCardsInst);
     }
   
-    sumDealerCards(dealerScoreCardsInst) {
-      this.dealerScoreCards += dealerScoreCardsInst; 
-    }
+
   }

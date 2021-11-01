@@ -117,25 +117,35 @@ textarea {
         background-color: black;
         opacity: 1;
     }
+     
     .sect-landing h2 { 
         width: 100%;
-        color: #fff;
+        background: -webkit-linear-gradient(red,black);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        color: transparent; 
+        -webkit-text-stroke: 2px #f5d9ab;   
         font-size: 3em;
         position: absolute;
         line-height: 1.4;
         text-align: center;
-        font-family: 'Roboto Regular';
+        font-family: 'Cheltenham-Std';
         margin-top: 2%;
         z-index: 1;
     }
+
     .sect-landing h1 { 
         width: 100%;
         position: absolute;
-        color: #fff;
+        background: -webkit-linear-gradient(red,black);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        color: transparent; 
+        -webkit-text-stroke: 2px #f5d9ab;
         font-size: 5em;
         line-height: 1.4;
         text-align: center;
-        font-family: 'Roboto Regular';
+        font-family: 'Cheltenham-Std';
         margin-top: 6%;
         z-index: 1;
     }
