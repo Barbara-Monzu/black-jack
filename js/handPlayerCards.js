@@ -32,10 +32,11 @@ class HandPlayerCards {
       this.nameNewCard = deckCards[0].name;
 
       this.handPlayer =[];
+
       this.handPlayerImages =[];
       this.init();
       //console.log('mazo HandPlayer size ' ,this.handPlayer);
-      // console.log('handPlayer', this.handPlayer )
+      console.log('handPlayer', this.handPlayer )
     }
   
     init() {
@@ -64,7 +65,7 @@ class HandPlayerCards {
       // this.ctx.drawImage(this.imageInstanceSecondCard, this.pos.x +50, this.pos.y +10, this.size.width, this.size.height);
       // this.imageNewCard && this.ctx.drawImage(this.imageNewCard, this.pos.x +100, this.pos.y, this.size.width, this.size.height);
       for (let i= 0; i < this.handPlayer.length; i++){ 
-        console.log('dentro del for Pleayer!!!')
+        //console.log('dentro del for Pleayer!!!')
         this.ctx.drawImage(this.handPlayerImages[i], this.pos.x +50 * i, this.pos.y, this.size.width, this.size.height); 
 
       }
@@ -85,7 +86,7 @@ class HandPlayerCards {
          this.handValue += playerCards.value;
        });
     
-      console.log('valor playerHand',this.handValue);
+      //console.log('valor playerHand',this.handValue);
       return this.handValue;
         
     }
@@ -99,7 +100,7 @@ class HandPlayerCards {
       // this.calculateHandPlayer();
       //this.createPlayerCard();
      
-      console.log('Hit Player ON',this.handPlayer);
+      //console.log('Hit Player ON',this.handPlayer);
       
     }
     stand (){

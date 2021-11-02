@@ -226,7 +226,101 @@ textarea {
     .contYearsLess {
         display: none;
     }
+    #player-win {
+        width: 90%;
+        height: 300px;
+        display: none;
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        -webkit-transform: translate(-50%, -50%);
+        opacity: 0;
+    }
+     
+    .winner{
+        
+        background: -webkit-linear-gradient(green,black);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        color: transparent; 
+        -webkit-text-stroke: 2px #f5d9ab;   
+        font-size: 4em;
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        -webkit-transform: translate(-50%, -50%);
+        line-height: 1.4;
+        text-align: center;
+        font-family: 'Cheltenham-Std';
+        text-align: center;
+        margin: 0 auto;
+    }
+    #dealer-win {
+        width: 90%;
+        height: 300px;
+        display: none;
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        -webkit-transform: translate(-50%, -50%);
+        opacity: 0;
+        margin: 0 auto;
 
+    }
+   .loser {
+        
+        background: -webkit-linear-gradient(red,black);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        color: transparent; 
+        -webkit-text-stroke: 2px #f5d9ab;   
+        font-size: 6em;
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        -webkit-transform: translate(-50%, -50%);
+        line-height: 1.4;
+        text-align: center;
+        font-family: 'Cheltenham-Std';
+        text-align: center;
+        margin: 0 auto;
+    }
+    #empate {
+        width: 90%;
+        height: 300px;
+        display: none;
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        -webkit-transform: translate(-50%, -50%);
+        opacity: 0;
+        margin: 0 auto;
+
+    }
+   .tie {
+        
+        background: -webkit-linear-gradient(blue,black);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        color: transparent; 
+        -webkit-text-stroke: 2px #f5d9ab;   
+        font-size: 6em;
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        -webkit-transform: translate(-50%, -50%);
+        line-height: 1.4;
+        text-align: center;
+        font-family: 'Cheltenham-Std';
+        text-align: center;
+        margin: 0 auto;
+    }
     .section-canvas {
         width: 100%;
         height: 100vh;
@@ -239,6 +333,7 @@ textarea {
         background-position: center center;
         background-size: cover; */
         opacity: 0;
+        margin: 0 auto;
     }
     #canvasGame {
         /* width: 100%;
@@ -337,7 +432,21 @@ textarea {
         opacity: 1;
         z-index: 1;
     }
-
+    .sect-bye-bye { 
+        width: 100%;
+        height: 100vh;
+        display: block;
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        -webkit-transform: translate(-50%, -50%);
+        background-image: url('../img/cierre.png');
+        background-repeat: no-repeat;
+        background-position: center center;
+        background-size: contain;
+        z-index: 0;
+    }
 
 
 

@@ -27,6 +27,7 @@ const ironhack_blackJack = {
     this.setDimensions();
     this.createAll();
     this.calculateAll();
+  
 
 
     this.setListeners();
@@ -49,8 +50,10 @@ const ironhack_blackJack = {
   },
 
   start() {//console.log('Hemos entrado a start');
-    setInterval(() => {
+    
+    let intervalId = setInterval(() => {
       this.calculateAll();
+
       this.drawAll();
     }, 1000 / 30)
 
@@ -68,7 +71,7 @@ const ironhack_blackJack = {
   },
 
   createBackground() {
-    this.background = new Background(this.ctx, 0, 0, this.canvasSize.width, this.canvasSize.height, "bgTapiz.svg");
+    this.background = new Background(this.ctx, 0, 0, this.canvasSize.width, this.canvasSize.height, "tapete2.jpeg");
   },
   createDealerScoreCards() {
     this.dealerScoreCardsInst = new DealerScore(this.ctx, 100, 100);
@@ -116,45 +119,57 @@ const ironhack_blackJack = {
 
   },
   calculateAll() {
+    console.log('calc')
     this.playerScoreCards = this.handPlayerInst.calculateHandPlayer();
     this.dealerScoreCards = this.handDealerInst.calculateHandDealer();
+    
   },
+  compareCards(){
 
+    // if(this.playerScoreCards > 21) { dealerWin();}
+    // if(this.playerScoreCards === 21) { dealerWin();}
+    if(this.dealerScoreCards === 21 ){ dealerWin(); console.log('dealerScoreCards === 21 YOU LOSE')}   
+    if(this.dealerScoreCards>21 ){ playerWin(); console.log('dealerScoreCards > 21 PLAYER WIN')}                 
+    if(this.dealerScoreCards <21 && this.dealerScoreCards > this.playerScoreCards) { dealerWin();console.log('this.dealerScoreCards <21 && this.dealerScoreCards > this.playerScoreCards YOU LOSE')}//ok
+    // if(this.dealerScoreCards <21 && this.dealerScoreCards < this.playerScoreCards) { playerWin();console.log('this.dealerScoreCards <21 && this.dealerScoreCards < this.playerScoreCards')}
+    if(this.dealerScoreCards === this.playerScoreCards){ empate(); console.log('this.dealerScoreCards === this.playerScoreCards EMPATE')}
+  },
   setListeners() { //Aqui debemos poner los eventos onClick de los botones del canvas
     document.addEventListener('keydown', (event) => { //evento 'hit pedir carta'
 
       if (event.key === ' ') {
 
         this.handPlayerInst.playerHit();
-        console.log('hand Player Hit + images', this.handplayerImages)
+        //console.log('hand Player Hit + images', this.handplayerImages)
+        if(this.playerScoreCards > 21) { dealerWin(); console.log('this.playerScoreCards > 21 YOU LOSE')}
+        else if(this.playerScoreCards === 21) { dealerWin();console.log('this.playerScoreCards === 21 YOU LOSE')}
       }
-      if (event.key === 's') {
 
-        // this.handPlayerInst.playerStand();
-        // console.log('hand Player stand', this.handplayerImages)
-        if (this.dealerScoreCards < 17){
-          for (let index = this.dealerScoreCards; index < 17 ; index++) {
-            switch (this.dealerScoreCards < 17) {
-              case this.dealerScoreCards <= 17 || this.dealerScoreCards >= 21 :
-                  this.handDealerInst.dealerHit();
-                  console.log('hand Dealer images', this.handDealerImages)
-                break;
-                case this.dealerScoreCards > 17:
-                   handOver();
-                  console.log('hand over')
-                break;
+      if (event.key === 's') {
+       
+        //console.log('hand Player stand', this.handplayerImages)
+        
+          for (let index = 0; index < 24; index++) {
+              
+              this.handDealerInst.dealerHit();  
+           
             
-              default:
-                break;
-            }
+            
+            let cards = this.handDealerInst.calculateHandDealer();
+            if(cards>17) {  
+                 this.compareCards();       
+               return;       
+            };
             
           }
-          
-        }
         
-
       }
+      if (event.key === 'n') {
 
+        this.newPlay();
+      }
+      
+         
 
 
 
@@ -169,14 +184,16 @@ const ironhack_blackJack = {
     });
   },
 
-  clearScreen() {
-    this.ctx.clearRect(0, 0, this.canvasSize.width, this.canvasSize.height);
-  },
+  // clearScreen() {
+  //   this.ctx.clearRect(0, 0, this.canvasSize.width, this.canvasSize.height);
+  // },
 
   isAmountPlayer() {
     //Check amount player
   },
-
+  newPlay() {
+    clearInterval(this.intervalId);
+  },
   gameOver() {
     //Llamamos a la funcion goSectionGoodBye() para cambiar a la pantalla de cierre.
     goSectionGoodBye();

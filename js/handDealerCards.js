@@ -42,9 +42,10 @@ class HandDealerCards {
     draw() {
       // this.ctx.drawImage(this.imageInstanceFirstCard, this.pos.x, this.pos.y, this.size.width, this.size.height);
       for (let i= 0; i < this.handDealer.length; i++){ 
-        console.log('dentro del for del dealer!!!')
+        //console.log('dentro del for del dealer!!!')
+      
         this.ctx.drawImage(this.handDealerImages[i], this.pos.x +50 * i, this.pos.y, this.size.width, this.size.height); 
-
+ 
       }
     }
     calculateHandDealer() {
@@ -54,7 +55,7 @@ class HandDealerCards {
          this.handValue += DealerCards.value;
        });
     
-      console.log('valor DealerHAnd',this.handValue);
+      //console.log('valor DealerHAnd',this.handValue);
       return this.handValue;
         
     }
@@ -65,9 +66,12 @@ class HandDealerCards {
       // this.calculateHandDealer();
       let extraerCard = deckCards.shift();
       this.handDealer.push(extraerCard);
+      
+      
       this.handDealerImages.push(new Image());
       this.handDealerImages[this.handDealerImages.length -1].src = extraerCard.src
-      console.log('Hit Dealer ON',this.handPlayer);
+      //console.log('Hit Dealer ON',this.handPlayer);
+      
     }
     dealersStand (){
 

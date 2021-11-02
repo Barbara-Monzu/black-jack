@@ -182,6 +182,38 @@ const splitText = (selector) => {
   };
   
   animate("h1");
+
+  ////MOMENTO GANADOR
+  const win = document.getElementById('player-win');
+  const loose = document.getElementById('dealer-win');
+  const tie = document.getElementById('empate');
+  function playerWin(){
+    
+    TweenMax.set(win,{opacity:0,display:"none"});
+     
+    gsap.timeline()
+        .to(win,1, {opacity:1,display:"block"});
+    //,onComplete: startTAbleGame()
+    
+    }
+    function dealerWin(){
+    
+        TweenMax.set(loose,{opacity:0,display:"none"});
+         
+        gsap.timeline()
+            .to(loose,1, {opacity:1,display:"block"});
+        //,onComplete: startTAbleGame()
+        
+    }
+    function empate(){
+    
+        TweenMax.set(tie,{opacity:0,display:"none"});
+         
+        gsap.timeline()
+            .to(tie,1, {opacity:1,display:"block"});
+        //,onComplete: startTAbleGame()
+        
+    }
   
 
 
