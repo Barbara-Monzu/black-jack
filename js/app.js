@@ -80,10 +80,10 @@ const ironhack_blackJack = {
     this.playerAmountTotalInst = new PlayerAmount(this.ctx, 100, 550);
   },
   createHandDealerCards() {
-    this.handDealerInst = new HandDealerCards(this.ctx, this.canvasSize.width / 2 - 50,  this.canvasSize.height / 10,this.canvasSize.height / 10, this.canvasSize.height / 6);
+    this.handDealerInst = new HandDealerCards(this.ctx, this.canvasSize.width / 2 - 50,  this.canvasSize.height / 10,this.canvasSize.height / 8, this.canvasSize.height / 6);
   },
   createHandPlayerCards() {
-    this.handPlayerInst = new HandPlayerCards(this.ctx, this.canvasSize.width / 2 - 50, this.canvasSize.height - 240, this.canvasSize.height / 10, this.canvasSize.height / 6);
+    this.handPlayerInst = new HandPlayerCards(this.ctx, this.canvasSize.width / 2 - 50, this.canvasSize.height - 260, this.canvasSize.height / 8, this.canvasSize.height / 6);
   },
   drawAll() {
     this.drawBackground();
@@ -125,11 +125,46 @@ const ironhack_blackJack = {
 
       if (event.key === ' ') {
 
-        this.handPlayerInst.hit();
-         
-
-        console.log(this.deckCards)
+        this.handPlayerInst.playerHit();
+        console.log('hand Player Hit + images', this.handplayerImages)
       }
+      if (event.key === 's') {
+
+        // this.handPlayerInst.playerStand();
+        // console.log('hand Player stand', this.handplayerImages)
+        if (this.dealerScoreCards < 17){
+          for (let index = this.dealerScoreCards; index < 17 ; index++) {
+            switch (this.dealerScoreCards < 17) {
+              case this.dealerScoreCards <= 17 || this.dealerScoreCards >= 21 :
+                  this.handDealerInst.dealerHit();
+                  console.log('hand Dealer images', this.handDealerImages)
+                break;
+                case this.dealerScoreCards > 17:
+                   handOver();
+                  console.log('hand over')
+                break;
+            
+              default:
+                break;
+            }
+            
+          }
+          
+        }
+        
+
+      }
+
+
+
+
+      if (event.key === 'q') {
+
+        //this.handDealerInst.dealerHit();
+        //console.log('hand Dealer images', this.handDealerImages)
+      }
+
+
 
     });
   },
