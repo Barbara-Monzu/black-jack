@@ -177,7 +177,7 @@ const splitText = (selector) => {
       y: 100,
       opacity: 0,
       stagger: 0.1,
-      delay: 1
+      delay: 1 
     });
   };
   
@@ -215,12 +215,20 @@ const splitText = (selector) => {
         
     }
   
-
-
+/// Rotacion fondo
+var fondoRotacion = document.getElementById('rotacion-fondo');
+TweenMax.to(fondoRotacion, 75, {rotation:"360", ease:Linear.easeNone, repeat:-1});
 
 //Llamada a cargar/ ejecutar App ironhack_blackJack 
 //ironhack_blackJack.init(); ////
 // function startTAbleGame(){
 //     ironhack_blackJack.init();
 // }
- 
+const bj = document.getElementById('bj');
+ function titularBJ(){
+    // TweenMax.set(bj,{opacity:0,display:"none"});
+         
+        gsap.timeline()
+            .to(bj,0.3, {opacity:0,display:"none"})
+            .to(bj,3, {opacity:1,display:"block"});
+ }

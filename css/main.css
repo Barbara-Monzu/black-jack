@@ -116,8 +116,14 @@ textarea {
         color :#fff;
         background-color: black;
         opacity: 1;
+        overflow: hidden;
     }
-     
+    .wellcomeTitu {
+        width: 100%;
+        height: 250px;
+        position: relative;
+        display: block;
+    }
     .sect-landing h2 { 
         width: 100%;
         background: -webkit-linear-gradient(red,black);
@@ -126,44 +132,81 @@ textarea {
         color: transparent; 
         -webkit-text-stroke: 2px #f5d9ab;   
         font-size: 3em;
-        position: absolute;
+        position: relative;
         line-height: 1.4;
         text-align: center;
         font-family: 'Cheltenham-Std';
-        margin-top: 2%;
-        z-index: 1;
+       z-index: 1;
     }
 
-    .sect-landing h1 { 
+    .wellcomeTitu h1 { 
         width: 100%;
-        position: absolute;
+        position: relative;
         background: -webkit-linear-gradient(red,black);
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
         color: transparent; 
         -webkit-text-stroke: 2px #f5d9ab;
-        font-size: 5em;
-        line-height: 1.4;
+        font-size: 6em;
+        line-height: -64.32px;
         text-align: center;
         font-family: 'Cheltenham-Std';
-        margin-top: 6%;
         z-index: 1;
     }
-    .img-landing { 
+    .blackJackTitu {
         width: 100%;
-        height: 100vh;
+        position: relative;
+        display: block;
+    }
+    .titu-blackJack {
+        width: 100%;
+        background: -webkit-linear-gradient(red,black);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        color: transparent; 
+        -webkit-text-stroke: 2px #f5d9ab;   
+        font-size: 7em;
+        position: relative;
+        line-height: -112px;
+        margin:0px;
+        text-align: center;
+        font-family: 'Cheltenham-Std';
+       z-index: 1;
+    }
+   
+    .f-rotacion{
+        width: 1200px;
+        height: 1200px;
+        display: block;
+        position: fixed;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        -webkit-transform: translate(-50%, -50%);
+        background-image: url('../img/f-rotacion2.png');
+        background-repeat: no-repeat;
+        background-position: center center;
+        background-size: cover;
+        opacity: .7;
+        z-index: 0;
+    }
+    .f-filigrana{
+        max-width: 790px;
+        max-height: 672px;
+        width: 100%;
+        height: 100%;
         display: block;
         position: absolute;
         left: 50%;
         top: 50%;
         transform: translate(-50%, -50%);
         -webkit-transform: translate(-50%, -50%);
-        background-image: url('../img/black-jac-bg.jpeg');
+        background-image: url('../img/f-filigrana.png');
         background-repeat: no-repeat;
         background-position: center center;
-        background-size: contain;
-        z-index: 0;
+        background-size: cover;
     }
+
     .footer-interaction {
         width: 100%;
         display: block;
@@ -193,33 +236,33 @@ textarea {
     }
     
     .sect-landing .cont-buttons .yearsLess { 
-        color: #fff;
-        border: 1px solid #fff;
-        background-color: black;
+        color: #f5d9ab;
+        border: 1px solid #f5d9ab;
+        background-color: transparent;
         display: block;
         opacity: 1;
         z-index: 1;
     }
     .sect-landing .cont-buttons .yearsOver { 
-        color: #fff;
-        border: 1px solid #fff;
-        background-color: black;
+        color: #f5d9ab;
+        border: 1px solid #f5d9ab;
+        background-color: transparent;
         display: block;
         opacity: 1;
         z-index: 1;
     }
     .sect-landing .cont-buttons .start-game { 
 
-        color: #fff;
-        border: 1px solid #fff;
-        background-color: black;
+        color: #f5d9ab;
+        border: 1px solid #f5d9ab;
+        background-color: transparent;
         display: none;
         opacity: 0;
         z-index: 1;
     }
     .sect-landing .cont-buttons .btn:hover { 
         color: black;
-        background-color: #fff;
+        background-color: #f5d9ab;
         border:1px solid black;
         z-index: 1;
     }
