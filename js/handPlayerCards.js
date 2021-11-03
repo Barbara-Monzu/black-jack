@@ -82,9 +82,19 @@ class HandPlayerCards {
     calculateHandPlayer() {
       
       this.handValue = 0;
-       this.handPlayer.forEach(playerCards => {  
-         this.handValue += playerCards.value;
-       });
+      this.handPlayer.forEach(playerCards => {
+        if(playerCards.value === 11 && this.handValue > 21){
+         this.handValue + 1;
+        }
+        if(playerCards.value === 11 && this.handValue === 20 && this.handPlayer.length === 3) {
+         this.handValue + 1;
+        }
+        else {this.handValue += playerCards.value;}
+      });
+
+      // this.handPlayer.forEach(playerCards => {  
+      //   this.handValue += playerCards.value;
+      // });
     
       //console.log('valor playerHand',this.handValue);
       return this.handValue;

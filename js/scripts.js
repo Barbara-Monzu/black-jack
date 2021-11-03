@@ -112,7 +112,7 @@ function finalAnimation(){
     //On complete "final animation vuelve a la pantalla landing"
     setTimeout(() => {
         goSectionLanding();
-    }, 30000);
+    }, 5000);
 
     function goSectionLanding(){
 
@@ -126,7 +126,20 @@ function finalAnimation(){
      
 }
 //Formularion NickName del player- capturamos el nickName y con submit hacemos deaparecer el formulario almacenando la variable Nickname
-
+function clearHandTittle() { console.log('SETER Titulo');
+    if(win.style.display === 'block' ){
+        TweenMax.set(win,{opacity:1,display:"block"});
+        gsap.timeline().to(win, 0.3 ,{opacity:0,display:"none"});
+    }
+    else if(loose.style.display === 'block' ){   
+        TweenMax.set(loose,{opacity:1,display:"block"});
+        gsap.timeline().to(loose, 0.3 ,{opacity:0,display:"none"});
+    }
+    else if(tie.style.display === 'block' ){ 
+        TweenMax.set(tie,{opacity:1,display:"block"});
+        gsap.timeline().to(tie, 0.3 ,{opacity:0,display:"none"});
+    }
+}
 
 let nickName = document.querySelector("input").value;
 document.getElementById('nickForm').addEventListener('click', event => {
@@ -187,13 +200,34 @@ const splitText = (selector) => {
   const win = document.getElementById('player-win');
   const loose = document.getElementById('dealer-win');
   const tie = document.getElementById('empate');
-  function playerWin(){
+  const dealerBj = document.getElementById('dealerBj');
+  const playerBj = document.getElementById('playerBj');
+
+    function dBlackJack(){
     
-    TweenMax.set(win,{opacity:0,display:"none"});
-     
-    gsap.timeline()
-        .to(win,1, {opacity:1,display:"block"});
-    //,onComplete: startTAbleGame()
+        TweenMax.set(dealerBj,{opacity:0,display:"none"});
+        
+        gsap.timeline()
+            .to(dealerBj,1, {opacity:1,display:"block"});
+        //,onComplete: startTAbleGame()
+    
+    }
+    function pBlackJack(){
+    
+        TweenMax.set(playerBj,{opacity:0,display:"none"});
+            
+        gsap.timeline()
+            .to(playerBj,1, {opacity:1,display:"block"});
+        //,onComplete: startTAbleGame()
+        
+    }
+    function playerWin(){
+    
+        TweenMax.set(win,{opacity:0,display:"none"});
+        
+        gsap.timeline()
+            .to(win,1, {opacity:1,display:"block"});
+        //,onComplete: startTAbleGame()
     
     }
     function dealerWin(){

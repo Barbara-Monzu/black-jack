@@ -20,11 +20,13 @@ const ironhack_blackJack = {
   handDealerCardsInst: undefined,
   handPlayerCards: [],
   handPlayerCardsInst: undefined,
+  intervalId:undefined,
 
 
   init() {
     this.setContext();
     this.setDimensions();
+    suffleDeck(deckCards);
     this.createAll();
     this.calculateAll();
   
@@ -50,16 +52,17 @@ const ironhack_blackJack = {
   },
 
   start() {//console.log('Hemos entrado a start');
-    
-    let intervalId = setInterval(() => {
-      this.calculateAll();
-
+    this.intervalId = setInterval(() => {
+      
       this.drawAll();
+      this.calculateAll();
+    
+      if (this.playerAmount <= 0) {
+        this.gameOver();
+      }
     }, 1000 / 30)
 
-    if (this.isAmountPlayer() === 0) {
-      this.gameOver();
-    }
+     
   },
   createAll() {
     this.createBackground();
@@ -122,77 +125,127 @@ const ironhack_blackJack = {
     console.log('calc')
     this.playerScoreCards = this.handPlayerInst.calculateHandPlayer();
     this.dealerScoreCards = this.handDealerInst.calculateHandDealer();
-    
+    this.compareCards()
   },
   compareCards(){
-
-    // if(this.playerScoreCards > 21) { dealerWin();}
-    // if(this.playerScoreCards === 21) { dealerWin();}
-    if(this.dealerScoreCards === 21 ){ dealerWin(); console.log('dealerScoreCards === 21 YOU LOSE')}   
-    if(this.dealerScoreCards>21 ){ playerWin(); console.log('dealerScoreCards > 21 PLAYER WIN')}                 
-    if(this.dealerScoreCards <21 && this.dealerScoreCards > this.playerScoreCards) { dealerWin();console.log('this.dealerScoreCards <21 && this.dealerScoreCards > this.playerScoreCards YOU LOSE')}//ok
-    // if(this.dealerScoreCards <21 && this.dealerScoreCards < this.playerScoreCards) { playerWin();console.log('this.dealerScoreCards <21 && this.dealerScoreCards < this.playerScoreCards')}
-    if(this.dealerScoreCards === this.playerScoreCards){ empate(); console.log('this.dealerScoreCards === this.playerScoreCards EMPATE')}
+    if(this.dealerEndRound) return
+    //console.log('hola', this.dealerScoreCards)
+    if(this.dealerScoreCards === 21 && this.handDealerInst.handDealer.length - 1 === 2) {
+      dBlackJack();
+      this.dealerEndRound = true;
+      this.playerAmount -= 100;
+    }
+    else if(this.dealerScoreCards === 21 ){ 
+      dealerWin();
+      this.dealerEndRound = true;
+      this.playerAmount -= 100;
+      console.log('dealerScoreCards === 21 YOU LOSE');
+    }   
+    else if(this.dealerScoreCards>21 ){ 
+      playerWin(); 
+      this.dealerEndRound = true;
+      this.playerAmount += 100;
+      console.log('dealerScoreCards > 21 PLAYER WIN');
+    } 
+    else if(this.playerScoreCards === 21 && this.handDealerInst.handDealer.length - 1 === 2 && this.dealerScoreCards === 21 ) { 
+      dealerWin();
+      this.dealerEndRound = true; 
+      this.playerAmount -= 100;
+      console.log('this.playerScoreCards === 21 YOU LOSE');
+    }                
+    else if(this.dealerScoreCards === this.playerScoreCards){
+       empate(); 
+       this.dealerEndRound = true;
+       console.log('this.dealerScoreCards === this.playerScoreCards EMPATE')
+      }
   },
   setListeners() { //Aqui debemos poner los eventos onClick de los botones del canvas
     document.addEventListener('keydown', (event) => { //evento 'hit pedir carta'
 
       if (event.key === ' ') {
-
+        if(this.endRound) return;
         this.handPlayerInst.playerHit();
-        //console.log('hand Player Hit + images', this.handplayerImages)
-        if(this.playerScoreCards > 21) { dealerWin(); console.log('this.playerScoreCards > 21 YOU LOSE')}
-        else if(this.playerScoreCards === 21) { dealerWin();console.log('this.playerScoreCards === 21 YOU LOSE')}
+        this.calculateAll();
+        //Condiciones de comparacion del player.
+        if(this.playerScoreCards === 21 && this.handPlayerInst.handPlayer.length - 1 === 2) {
+          pBlackJack(); 
+          this.endRound = true;
+          this.playerAmount += 100;
+        }
+        else if(this.playerScoreCards > 21) { 
+          dealerWin();
+          this.endRound = true;
+
+          this.playerAmount -= 100;
+          console.log('this.playerScoreCards > 21 YOU LOSE');
+        }
+        else if(this.playerScoreCards === 21 ) { 
+          playerWin();
+          this.endRound = true;
+          this.playerAmount += 100;
+          console.log('this.playerScoreCards === 21 YOU LOSE');
+        }
+         
       }
 
       if (event.key === 's') {
        
+        this.endRound = true;
         //console.log('hand Player stand', this.handplayerImages)
         
           for (let index = 0; index < 24; index++) {
               
-              this.handDealerInst.dealerHit();  
-           
-            
+            this.handDealerInst.dealerHit();  
             
             let cards = this.handDealerInst.calculateHandDealer();
             if(cards>17) {  
-                 this.compareCards();       
-               return;       
+              this.compareCards();       
+              return;       
             };
             
           }
+
         
       }
       if (event.key === 'n') {
-
-        this.newPlay();
+        this.clearScreen();
+        clearHandTittle();
+        //this.newPlay();
       }
       
-         
+      // if (event.key === 'q') {
 
-
-
-      if (event.key === 'q') {
-
-        //this.handDealerInst.dealerHit();
-        //console.log('hand Dealer images', this.handDealerImages)
-      }
+      //   //this.handDealerInst.dealerHit();
+      //   //console.log('hand Dealer images', this.handDealerImages)
+      // }
 
 
 
     });
   },
 
-  // clearScreen() {
-  //   this.ctx.clearRect(0, 0, this.canvasSize.width, this.canvasSize.height);
-  // },
+  clearScreen() {
+    // this.ctx.clearRect(0, 0, this.canvasSize.width, this.canvasSize.height);
+    //this.init();
+    this.newPlay();
+    suffleDeck(deckCards);
+    this.endRound = false;
+    this.dealerEndRound =false;
+
+    this.createDealerScoreCards();
+    this.createPlayerScoreCards();
+    this.createHandDealerCards();
+    this.createHandPlayerCards();
+
+    this.start();
+  },
 
   isAmountPlayer() {
     //Check amount player
   },
   newPlay() {
     clearInterval(this.intervalId);
+    console.log('estoy limpiando el intervalo this.intervalId');
   },
   gameOver() {
     //Llamamos a la funcion goSectionGoodBye() para cambiar a la pantalla de cierre.

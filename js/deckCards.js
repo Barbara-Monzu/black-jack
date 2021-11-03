@@ -1,7 +1,7 @@
 const deckCards = [
     {
         name: '1 of Hearts',
-        value: 1,
+        value: 11,
         suit: 'Hearts',
         src: 'img/Hearts/1_Hearts.png'
     },
@@ -92,7 +92,7 @@ const deckCards = [
 
     {
         name: '1 of Diamonds',
-        value: 1,
+        value: 11,
         suit: 'Diamonds',
         src: 'img/Diamonds/1_Diamonds.png'
     },
@@ -183,7 +183,7 @@ const deckCards = [
 
     {
         name: '1 of Clubs',
-        value: 1,
+        value: 11,
         suit: 'Clubs',
         src: 'img/Clubs/1_Clubs.png'
     },
@@ -274,7 +274,7 @@ const deckCards = [
 
     {
         name: '1 of Spades',
-        value: 1,
+        value: 11,
         suit: 'Spades',
         src: 'img/Spades/1_Spades.png'
     },
@@ -364,7 +364,7 @@ const deckCards = [
     },
 ]
 
-function SuffleDeck(deckCards){
+function suffleDeck(deckCards){
     // shuffle the cards
     for (let i = deckCards.length - 1; i > 0; i--) {
       let j = Math.floor(Math.random() * i);
@@ -374,4 +374,4 @@ function SuffleDeck(deckCards){
     }
     //console.log(deckCards);
 }
-SuffleDeck(deckCards);
+//suffleDeck(deckCards);
