@@ -51,11 +51,13 @@ class HandPlayerCards {
       this.handPlayerImages.push(new Image());
       this.handPlayerImages[1].src = deckCards[2].src;
 
-    
-      this.handPlayer.push(deckCards[0]);
-      this.handPlayer.push(deckCards[2]);
-      deckCards.splice(2, 1);
-      deckCards.splice(0, 1);
+      if(deckCards.length >= 3) {
+        this.handPlayer.push(deckCards[0]);
+        this.handPlayer.push(deckCards[2]);
+        deckCards.splice(2, 1);
+        deckCards.splice(0, 1);
+      }
+      deckCards.length === 0 && (deckCards = [...deckCopy]);
     }
      
   
@@ -83,13 +85,9 @@ class HandPlayerCards {
       
       this.handValue = 0;
       this.handPlayer.forEach(playerCards => {
-        if(playerCards.value === 11 && this.handValue > 21){
-         this.handValue + 1;
-        }
-        if(playerCards.value === 11 && this.handValue === 20 && this.handPlayer.length === 3) {
-         this.handValue + 1;
-        }
-        else {this.handValue += playerCards.value;}
+        if(playerCards.value  === 11 && this.handValue +11 > 21){
+         this.handValue += 1;
+        } else {this.handValue += playerCards.value;}
       });
 
       // this.handPlayer.forEach(playerCards => {  
@@ -103,7 +101,10 @@ class HandPlayerCards {
 
     playerHit() {
       console.log(deckCards)
-      let extraerCard = deckCards.shift();
+      
+      let extraerCard;
+      deckCards.length >= 1 && (extraerCard = deckCards.shift());
+      deckCards.length === 0 && (deckCards = [...deckCopy]);
       this.handPlayer.push(extraerCard);
       this.handPlayerImages.push(new Image());
       this.handPlayerImages[this.handPlayerImages.length -1].src = extraerCard.src
@@ -118,6 +119,10 @@ class HandPlayerCards {
     }
     double (){;
 
+    }
+    destroyPlayerHand() {
+      delete this.handPlayer;
+      delete this.handPlayerImages;
     }
   
 

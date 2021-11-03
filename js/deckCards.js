@@ -364,6 +364,8 @@ const deckCards = [
     },
 ]
 
+const deckCopy = [...deckCards];
+
 function suffleDeck(deckCards){
     // shuffle the cards
     for (let i = deckCards.length - 1; i > 0; i--) {

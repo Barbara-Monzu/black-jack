@@ -32,10 +32,19 @@ class HandDealerCards {
       // this.imageInstanceFirstCard.src = this.imageFirstCard;
       // this.handDealer.push(deckCards[1]);
       // deckCards.splice(1, 1);
+
       this.handDealerImages.push(new Image());
       this.handDealerImages[0].src = deckCards[1].src;
-      this.handDealer.push(deckCards[1]);
-      deckCards.splice(1, 1);
+
+      // this.handDealer.push(deckCards[1]);
+      // deckCards.splice(1, 1);
+
+      if(deckCards.length >= 3) {
+        this.handDealer.push(deckCards[1]);
+        deckCards.splice(1, 1);
+      }
+      deckCards.length === 0 && (deckCards = [...deckCopy]);
+
     }
   
   
@@ -51,8 +60,11 @@ class HandDealerCards {
     calculateHandDealer() {
       
       this.handValue = 0
-       this.handDealer.forEach(DealerCards => {  
-         this.handValue += DealerCards.value;
+       this.handDealer.forEach(elm => {  
+  
+         if(elm.value  === 11 && this.handValue +11 > 21){
+          this.handValue += 1;
+         } else {this.handValue += elm.value;}
        });
     
       //console.log('valor DealerHAnd',this.handValue);
@@ -64,17 +76,21 @@ class HandDealerCards {
       // console.log(deckCards)
       // this.handDealer.push(deckCards.shift());
       // this.calculateHandDealer();
-      let extraerCard = deckCards.shift();
+      // let extraerCard = deckCards.shift();
+      // this.handDealer.push(extraerCard);
+      
+      let extraerCard;
+      deckCards.length >= 1 && (extraerCard = deckCards.shift());
+      deckCards.length === 0 && (deckCards = [...deckCopy]);
       this.handDealer.push(extraerCard);
-      
-      
       this.handDealerImages.push(new Image());
       this.handDealerImages[this.handDealerImages.length -1].src = extraerCard.src
       //console.log('Hit Dealer ON',this.handPlayer);
       
     }
-    dealersStand (){
-
+    destroyDealerHand() {
+      delete this.handDealer;
+      delete this.handDealerImages
     }
 
   }

@@ -14,14 +14,16 @@ const ironhack_blackJack = {
   dealerScoreCardsInst: undefined,
   playerScoreCards: 0,
   playerScoreCardsInst: undefined,
-  playerAmount: 1000,
+  playerAmount: 300,
   playerAmountTotalInst: undefined,
   handDealerCards: [],
   handDealerCardsInst: undefined,
   handPlayerCards: [],
   handPlayerCardsInst: undefined,
   intervalId:undefined,
-
+  FPS: 30,
+  framesCounter: 0,
+  secondsCounter: 0,
 
   init() {
     this.setContext();
@@ -53,14 +55,27 @@ const ironhack_blackJack = {
 
   start() {//console.log('Hemos entrado a start');
     this.intervalId = setInterval(() => {
-      
+      if (this.framesCounter !== 0 && this.framesCounter % (this.FPS * 1) === 0) {
+        // if(condition) something;
+        // else somethingElse;
+
+        // condition ? something : somethingElse;
+
+        // condition && something
+        // condition || somethingElse
+
+    
+
+        this.startDealerRound && this.dropDealerCards();
+      }
       this.drawAll();
       this.calculateAll();
-    
+    ///falla funcion GAME OVER POR k esta en el bucle 
       if (this.playerAmount <= 0) {
         this.gameOver();
       }
-    }, 1000 / 30)
+      this.framesCounter ++
+    }, 1000 / this.FPS)
 
      
   },
@@ -122,19 +137,30 @@ const ironhack_blackJack = {
 
   },
   calculateAll() {
-    console.log('calc')
+    
     this.playerScoreCards = this.handPlayerInst.calculateHandPlayer();
     this.dealerScoreCards = this.handDealerInst.calculateHandDealer();
-    this.compareCards()
+    this.endRound && !this.dealerEndRound && this.compareCards();
+    
   },
   compareCards(){
-    if(this.dealerEndRound) return
-    //console.log('hola', this.dealerScoreCards)
-    if(this.dealerScoreCards === 21 && this.handDealerInst.handDealer.length - 1 === 2) {
+    // if(this.dealerScoreCards === 21 && this.handDealerInst.handDealer.length  === 2) {
+    //   dBlackJack();
+    //   this.dealerEndRound = true;
+    //   this.playerAmount -= 100;
+    // }
+    if(this.handDealerInst.handDealer.length === 2 && this.dealerScoreCards === 21 ) { 
       dBlackJack();
-      this.dealerEndRound = true;
+      this.dealerEndRound = true; 
       this.playerAmount -= 100;
+      console.log('this.handDealerInst.handDealer.length - 1 === 2 && this.dealerScoreCards === 21 YOU LOSE');
     }
+    else if(this.playerScoreCards === 21 && this.handDealerInst.handDealer.length === 2 && this.dealerScoreCards === 21 ) { 
+      dBlackJack();
+      this.dealerEndRound = true; 
+      this.playerAmount -= 100;
+      console.log('this.playerScoreCards === 21 && this.handDealerInst.handDealer.length - 1 === 2 && this.dealerScoreCards === 21 YOU LOSE');
+    } 
     else if(this.dealerScoreCards === 21 ){ 
       dealerWin();
       this.dealerEndRound = true;
@@ -146,18 +172,25 @@ const ironhack_blackJack = {
       this.dealerEndRound = true;
       this.playerAmount += 100;
       console.log('dealerScoreCards > 21 PLAYER WIN');
-    } 
-    else if(this.playerScoreCards === 21 && this.handDealerInst.handDealer.length - 1 === 2 && this.dealerScoreCards === 21 ) { 
-      dealerWin();
-      this.dealerEndRound = true; 
-      this.playerAmount -= 100;
-      console.log('this.playerScoreCards === 21 YOU LOSE');
     }                
-    else if(this.dealerScoreCards === this.playerScoreCards){
+    else if(this.dealerScoreCards === this.playerScoreCards && this.dealerStand){
        empate(); 
        this.dealerEndRound = true;
        console.log('this.dealerScoreCards === this.playerScoreCards EMPATE')
+    }
+    else if(this.playerScoreCards < 21 && this.dealerScoreCards < 21 && this.dealerScoreCards > this.playerScoreCards && this.dealerStand){
+      dealerWin();
+      this.dealerEndRound = true;
+      this.playerAmount -= 100;
+      console.log('this.dealerScoreCards <21 && this.dealerScoreCards > this.playerScoreCards')
       }
+    else if(this.playerScoreCards < 21 && this.dealerScoreCards < 21 && this.dealerScoreCards < this.playerScoreCards && this.dealerStand){
+      playerWin();
+      this.dealerEndRound = true;
+      this.playerAmount += 100;
+      console.log(this.dealerScoreCards, this.playerScoreCards, 'this.dealerScoreCards <21 && this.dealerScoreCards > this.playerScoreCards')
+    }
+
   },
   setListeners() { //Aqui debemos poner los eventos onClick de los botones del canvas
     document.addEventListener('keydown', (event) => { //evento 'hit pedir carta'
@@ -166,8 +199,9 @@ const ironhack_blackJack = {
         if(this.endRound) return;
         this.handPlayerInst.playerHit();
         this.calculateAll();
+        //this.playerScoreCards = this.handPlayerInst.calculateHandPlayer();
         //Condiciones de comparacion del player.
-        if(this.playerScoreCards === 21 && this.handPlayerInst.handPlayer.length - 1 === 2) {
+        if(this.playerScoreCards === 21 && this.handPlayerInst.handPlayer.length === 2) {
           pBlackJack(); 
           this.endRound = true;
           this.playerAmount += 100;
@@ -193,18 +227,19 @@ const ironhack_blackJack = {
         this.endRound = true;
         //console.log('hand Player stand', this.handplayerImages)
         
-          for (let index = 0; index < 24; index++) {
+          // for (let index = 0; index < 24; index++) {
               
-            this.handDealerInst.dealerHit();  
+          //   this.handDealerInst.dealerHit();  
             
-            let cards = this.handDealerInst.calculateHandDealer();
-            if(cards>17) {  
-              this.compareCards();       
-              return;       
-            };
+          //   let cards = this.handDealerInst.calculateHandDealer();
+          //   if(cards>17) {  
+          //     this.compareCards();       
+          //     return;       
+          //   };
             
-          }
-
+          // }
+        this.startDealerRound = true;
+        
         
       }
       if (event.key === 'n') {
@@ -223,7 +258,16 @@ const ironhack_blackJack = {
 
     });
   },
-
+  dropDealerCards(){
+      this.handDealerInst.dealerHit();  
+            
+      let cards = this.handDealerInst.calculateHandDealer();
+      if(cards>17) {  
+        this.startDealerRound = false; 
+        this.dealerStand = true;
+        //this.compareCards();    
+      };
+  },
   clearScreen() {
     // this.ctx.clearRect(0, 0, this.canvasSize.width, this.canvasSize.height);
     //this.init();
@@ -231,7 +275,10 @@ const ironhack_blackJack = {
     suffleDeck(deckCards);
     this.endRound = false;
     this.dealerEndRound =false;
+    this.dealerStand = false;
 
+    this.handPlayerInst.destroyPlayerHand();
+    this.handDealerInst.destroyDealerHand();
     this.createDealerScoreCards();
     this.createPlayerScoreCards();
     this.createHandDealerCards();
@@ -250,6 +297,8 @@ const ironhack_blackJack = {
   gameOver() {
     //Llamamos a la funcion goSectionGoodBye() para cambiar a la pantalla de cierre.
     goSectionGoodBye();
+    clearInterval(this.intervalId);
+    console.log('llama desde GAME OVER');
   }
 
 }

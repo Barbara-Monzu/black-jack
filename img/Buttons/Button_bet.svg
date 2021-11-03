@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="100px" height="40px" viewBox="0 0 100 40" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>Button_bet</title>
+    <g id="Button_bet" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <rect id="Rectangle" stroke="#FFFFFF" fill="#03994D" x="0.5" y="0.5" width="99" height="39" rx="8"></rect>
+        <text id="Bet" font-family="Roboto-Medium, Roboto" font-size="14" font-weight="400" fill="#FFFFFF">
+            <tspan x="39.5" y="25">Bet</tspan>
+        </text>
+    </g>
+</svg>

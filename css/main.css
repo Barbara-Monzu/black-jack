@@ -281,7 +281,7 @@ textarea {
         opacity: 0;
     }
      
-    .pBj{
+    .pbj{
         background: -webkit-linear-gradient(green,black);
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
@@ -312,7 +312,7 @@ textarea {
     }
      
     .winner{
-        
+        width: 100%;
         background: -webkit-linear-gradient(green,black);
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
@@ -342,14 +342,14 @@ textarea {
         opacity: 0;
         margin: 0 auto;
     }
-   .dBj {
-        
+   .dbj{
+        width: 100%;
         background: -webkit-linear-gradient(red,black);
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
         color: transparent; 
         -webkit-text-stroke: 2px #f5d9ab;   
-        font-size: 6em;
+        font-size: 4em;
         position: absolute;
         left: 50%;
         top: 50%;
@@ -539,7 +539,7 @@ textarea {
     .sect-bye-bye { 
         width: 100%;
         height: 100vh;
-        display: block;
+        display: none;
         position: absolute;
         left: 50%;
         top: 50%;
@@ -551,7 +551,26 @@ textarea {
         background-size: contain;
         z-index: 0;
     }
-
+    .sect-bye-bye span {
+            width: 100%;
+            background: -webkit-linear-gradient(blue,black);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            color: transparent; 
+            -webkit-text-stroke: 2px #f5d9ab;   
+            font-size: 6em;
+            position: absolute;
+            left: 0%;
+            top: 25%;
+            transform: translate(-50%, -50%);
+            -webkit-transform: translate(-50%, -50%);
+            line-height: 1.4;
+            text-align: center;
+            font-family: 'Cheltenham-Std';
+            text-align: center;
+            margin: 0 auto;
+    
+    }
 
 
 

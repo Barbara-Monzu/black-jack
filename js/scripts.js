@@ -66,6 +66,7 @@ const content3 = document.getElementById('sectionGood-bye');
     // Agregamos un addevent lisener para escucharclick btn "start-game" iniciar partida. 
     function startGame() { //console.log('Escucho el evento startGame');
     //Llamamos a la funcion "goSectionCanvas()" para cambiar a la pantalla de juego y iniciar "ironhack_BlackJAck.init()" mediante el callback de la animacion "goSectionCanvas()""
+
         goSectionCanvas();
 
         //Devolvemos los btn a su estado inicial de la Landing
@@ -91,9 +92,10 @@ function goSectionCanvas(){
         .to(content,0.3, {opacity:0,display:"none"})
         .to(content2,1, {opacity:1,display:"block"});
     //,onComplete: startTAbleGame()
-    setTimeout(() => {
-        goSectionGoodBye();
-    }, 100000);
+    //Descomentarara acceder a la pagina de cierre despues de 10 minutos 
+    // setTimeout(() => {
+    //     goSectionGoodBye();
+    // }, 100000);
 }
 //Animacion Sections Good Bye
 function goSectionGoodBye(){
@@ -102,17 +104,30 @@ function goSectionGoodBye(){
         
         gsap.timeline()
             .to(content2,0.3, {opacity:0,display:"none"})
-            .to(content3,1, {opacity:1,display:"block",onComplete: finalAnimation()});
+            .to(content3,1, {opacity:1,display:"flex",onComplete: finalAnimation()});
       
 }
 function finalAnimation(){
     
     //Añadimos un setTimeout oara que despues de que termine la animacion final o transcurridos X segundos llame a la funcion "goSectionLanding()"" para regresar a la pantalla principal
-
+    const gameOver = document.getElementById('gameOver');
+    let S = [{scale:1.1},{scale:1.02},{scale:1.2}]
+      TweenMax.set(gameOver,{autoAlpha: 0,scale:3});
+      // tl.fromTo(sello, 0.3, {x:0,autoAlpha: 1, scale:1, ease: Power2.easeOut });
+      gsap.timeline()
+            .to(gameOver,0.3, {opacity:0, display:"none"})
+            .to(gameOver,1, {opacity:1,display:"block"})
+            .to(gameOver,1,{delay:0.5, autoAlpha:1, scale:1,ease:Elastic.easeOut.config(1.1, .8)}) 
+            .to(gameOver,0.5,{bezier:{values:S}, ease:Elastic.easeOut})
+            .to(gameOver,1,{delay:0.5, autoAlpha:1, scale:1,ease:Elastic.easeOut.config(.8, 1.3)})
+            .to(gameOver,1,{delay:0.5, autoAlpha:1, scale:1,ease:Elastic.easeOut.config(1.3, 1)});
+       
     //On complete "final animation vuelve a la pantalla landing"
-    setTimeout(() => {
-        goSectionLanding();
-    }, 5000);
+     
+    let intervalId = setTimeout(() => {
+        goSectionLanding(); 
+        
+    }, 6000);  
 
     function goSectionLanding(){
 
@@ -121,8 +136,11 @@ function finalAnimation(){
         gsap.timeline()
             .to(content3,0.3, {opacity:0,display:"none"})
             .to(content,1, {opacity:1,display:"block"});
-            
+            // window.clearTimeout(intervalId);
     }
+    
+    
+    
      
 }
 //Formularion NickName del player- capturamos el nickName y con submit hacemos deaparecer el formulario almacenando la variable Nickname
