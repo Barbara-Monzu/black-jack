@@ -323,4 +323,10 @@ function gameOverSound() {
     evilLaugh.play();
 };
 
+let cartasSound = new Audio('Barajar-repartir-cartas');
+cartasSound.setAttribute("preload", "auto");
+function cartasSounds() {
+    cartasSound.play();
+};
+
  

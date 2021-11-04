@@ -295,19 +295,18 @@ const ironhack_blackJack = {
           this.handPlayerInst.playerHit();
           this.calculateAll();
           if(this.playerScoreCards === 21 && this.handPlayerInst.handPlayer.length === 2) {
-            pBlackJack(); 
+            pBlackJack(); bravoWinHand();
             this.endRound = true;
             this.playerAmount += 100;
           }
           else if(this.playerScoreCards > 21) { 
-            dealerWin();
+            dealerWin(); loserHand();
             this.endRound = true;
-
             this.playerAmount -= 100;
             console.log('this.playerScoreCards > 21 YOU LOSE');
           }
           else if(this.playerScoreCards === 21 ) { 
-            playerWin();
+            playerWin(); bravoWinHand();
             this.endRound = true;
             this.playerAmount += 100;
             console.log('this.playerScoreCards === 21 YOU LOSE');
