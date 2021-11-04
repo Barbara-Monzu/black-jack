@@ -110,14 +110,31 @@ function goSectionGoodBye(){
 function finalAnimation(){
     
     //Añadimos un setTimeout oara que despues de que termine la animacion final o transcurridos X segundos llame a la funcion "goSectionLanding()"" para regresar a la pantalla principal
-    const gameOver = document.getElementById('gameOver');
+    const nickGameOver = document.getElementById('nickGameOver');
+    let S = [{scale:1.1},{scale:1.02},{scale:1.2}]
+      TweenMax.set(nickGameOver,{autoAlpha: 0,scale:3});
+      gsap.timeline()
+            .to(nickGameOver,0.3, {opacity:0, display:"none"})
+            .to(nickGameOver,1, {opacity:1,display:"block"})
+            .to(nickGameOver,1,{delay:0.1, autoAlpha:1, scale:1,ease:Elastic.easeOut.config(1.1, .8)}) 
+            .to(nickGameOver,0.5,{bezier:{values:S}, ease:Elastic.easeOut})
+            .to(nickGameOver,1,{delay:0.5, autoAlpha:1, scale:1,ease:Elastic.easeOut.config(.8, 1.3)})
+            .to(nickGameOver,1,{delay:0.5, autoAlpha:1, scale:1,ease:Elastic.easeOut.config(1.3, 1), delay:1, onComplete:finalAnimation2()})
+      
+    //On complete "final animation vuelve a la pantalla landing"
+     
+}
+function finalAnimation2(){
+    
+    //Añadimos un setTimeout oara que despues de que termine la animacion final o transcurridos X segundos llame a la funcion "goSectionLanding()"" para regresar a la pantalla principal
+    const gameOver = document.getElementById('gameOverId');
     let S = [{scale:1.1},{scale:1.02},{scale:1.2}]
       TweenMax.set(gameOver,{autoAlpha: 0,scale:3});
-      // tl.fromTo(sello, 0.3, {x:0,autoAlpha: 1, scale:1, ease: Power2.easeOut });
-      gsap.timeline()
-            .to(gameOver,0.3, {opacity:0, display:"none"})
+      
+      gsap.timeline()     
+            .to(gameOver,0.3, {opacity:0, display:"none"}, "+=1")
             .to(gameOver,1, {opacity:1,display:"block"})
-            .to(gameOver,1,{delay:0.5, autoAlpha:1, scale:1,ease:Elastic.easeOut.config(1.1, .8)}) 
+            .to(gameOver,1,{delay:0.1, autoAlpha:1, scale:1,ease:Elastic.easeOut.config(1.1, .8)}) 
             .to(gameOver,0.5,{bezier:{values:S}, ease:Elastic.easeOut})
             .to(gameOver,1,{delay:0.5, autoAlpha:1, scale:1,ease:Elastic.easeOut.config(.8, 1.3)})
             .to(gameOver,1,{delay:0.5, autoAlpha:1, scale:1,ease:Elastic.easeOut.config(1.3, 1)});
@@ -151,17 +168,23 @@ function clearHandTittle() { console.log('SETER Titulo');
     }
 }
 
-let nickName = document.querySelector("input").value;
+let nickName='';
+
 document.getElementById('nickForm').addEventListener('click', event => {
+    nickName = document.getElementById("input-Nick").value;
     
-    formularioNick();
+    formularioNick();   spanNick ();
 });
 let contForm = document.getElementsByClassName('form-player');
 function formularioNick(){
     TweenMax.set(contForm,{opacity:1,display:"block"});
     gsap.timeline().to(contForm, .6 ,{opacity:0,display:"none"});
 }
-    
+
+let spanNickname = document.getElementById('spanNickName');
+function  spanNick (){
+    spanNickname.innerHTML = nickName;
+}
 //////LANDING TEXT ANIMATION///////  
  
 
@@ -229,7 +252,7 @@ const splitText = (selector) => {
             
         gsap.timeline()
             .to(playerBj,1, {opacity:1,display:"block"})
-            .to(playerBj,1, {delay:2, opacity:0,display:"none"});
+            .to(playerBj,1, {delay:2, opacity:0, display:"none"});
         //,onComplete: startTAbleGame()
         
     }
@@ -281,3 +304,13 @@ const bj = document.getElementById('bj');
             .to(bj,0.3, {opacity:0,display:"none"})
             .to(bj,3, {opacity:1,display:"block"});
  }
+
+ function carcajadaFinal (fuente) {
+    const sonido = document.createElement("audio");
+    sonido.src = fuente;
+    sonido.setAttribute("preload", "auto");
+    sonido.setAttribute("controls", "none");
+    sonido.style.display = "none"; // <-- oculto
+    document.body.appendChild(sonido);
+    return sonido;
+};

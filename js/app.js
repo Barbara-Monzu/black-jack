@@ -25,6 +25,14 @@ const ironhack_blackJack = {
   FPS: 30,
   framesCounter: 0,
   secondsCounter: 0,
+  buttonHitInst:undefined,
+  buttonStandInst:undefined,
+  buttonClearInst:undefined,
+  buttonBetInst:undefined,
+  buttonBetInst:undefined,
+  imagebet:undefined,
+  // nickName:undefined,
+
 
   init() {
     this.setContext();
@@ -84,7 +92,10 @@ const ironhack_blackJack = {
     this.createBackground();
     this.createDealerScoreCards();
     this.createPlayerScoreCards();
+    this.createButtons();
     this.createPlayerAmountTotal();
+    this.createCoins();
+     
     this.createHandDealerCards();
     this.createHandPlayerCards();
   },
@@ -93,13 +104,32 @@ const ironhack_blackJack = {
     this.background = new Background(this.ctx, 0, 0, this.canvasSize.width, this.canvasSize.height, "tapete2.jpg");
   },
   createDealerScoreCards() {
-    this.dealerScoreCardsInst = new DealerScore(this.ctx, 100, 100);
+    this.dealerScoreCardsInst = new DealerScore(this.ctx, this.canvasSize.width / 2 - 110,  this.canvasSize.height / 14);
   },
   createPlayerScoreCards() {
-    this.playerScoreCardsInst = new PlayerScore(this.ctx, 100, 500);
+    this.playerScoreCardsInst = new PlayerScore(this.ctx, this.canvasSize.width / 2 - 110, this.canvasSize.height - 300);
+  },
+  createButtons(){
+    this.buttonHitInst = new Button(this.ctx, this.canvasSize.width / 6,  this.canvasSize.height - 210, 170, 50, "Buttons/Button_hit.svg")
+    this.buttonStandInst = new Button(this.ctx, this.canvasSize.width / 6,  this.canvasSize.height - 130, 170, 50, "Buttons/Button_stand.svg")
+    this.buttonClearInst = new Button(this.ctx, this.canvasSize.width / 1.3,  this.canvasSize.height - 130, 170, 50, "Buttons/Button_clear.svg")
+    this.buttonBetInst = new Button(this.ctx, this.canvasSize.width / 1.3,  this.canvasSize.height - 210, 170, 50, "Buttons/Button_bet.svg")
+    
   },
   createPlayerAmountTotal() {
-    this.playerAmountTotalInst = new PlayerAmount(this.ctx, 100, 550);
+    this.playerAmountTotalInst = new PlayerAmount(this.ctx, this.canvasSize.width / 1.3  , this.canvasSize.height - 300);
+  },
+  createCoins(){
+    this.coinsInstance = new Coins(this.ctx, this.canvasSize.width / 1.19  , this.canvasSize.height - 355, 80, 80, "coins_1.png")
+    // this.coinsInstance3 = new Coins(this.ctx, this.canvasSize.width / 1.2,  this.canvasSize.height / 4, 200, 200, "Buttons/hand.png")
+    // this.imagebet = new Image();
+    // this.imagebet.src = `img/Red_C.png`;
+    
+
+  },
+  loadCoinImage (){
+    this.imagebet = new Image();
+    this.imagebet.src = `img/Red_C.png`;
   },
   createHandDealerCards() {
     this.handDealerInst = new HandDealerCards(this.ctx, this.canvasSize.width / 2 - 50,  this.canvasSize.height / 10,this.canvasSize.height / 8, this.canvasSize.height / 6);
@@ -112,7 +142,10 @@ const ironhack_blackJack = {
     this.drawBackground();
     this.drawDealerScoreCards();
     this.drawPlayerScoreCards();
+    this.drawButtons();
     this.drawPlayerAmountTotal();
+    this.drawCoins();
+    this.drawbet();
     this.drawHandDealerCards();
     this.drawHandPlayerCards();
     // this.handPlayerInst.drawNewPlayerCard();
@@ -128,8 +161,23 @@ const ironhack_blackJack = {
     this.playerScoreCardsInst.draw(this.playerScoreCards);
 
   },
+  drawButtons() {
+    this.buttonHitInst.draw();
+    this.buttonStandInst.draw()
+    this.buttonClearInst.draw();
+    this.buttonBetInst.draw();
+  },
   drawPlayerAmountTotal() {
     this.playerAmountTotalInst.draw(this.playerAmount);
+  },
+  drawCoins() {
+    this.coinsInstance.draw();
+  },
+  drawbet() {
+    if (this.imagebet) {
+      this.ctx.drawImage(this.imagebet, this.canvasSize.width / 2, this.canvasSize.height / 2, 100, 100);
+    }
+    
   },
   drawHandDealerCards() {
     this.handDealerInst.draw();
@@ -206,8 +254,6 @@ const ironhack_blackJack = {
         if(this.endRound) return;
         this.handPlayerInst.playerHit();
         this.calculateAll();
-        //this.playerScoreCards = this.handPlayerInst.calculateHandPlayer();
-        //Condiciones de comparacion del player.
         if(this.playerScoreCards === 21 && this.handPlayerInst.handPlayer.length === 2) {
           pBlackJack(); 
           this.endRound = true;
@@ -225,42 +271,61 @@ const ironhack_blackJack = {
           this.endRound = true;
           this.playerAmount += 100;
           console.log('this.playerScoreCards === 21 YOU LOSE');
-        }
-         
+        }   
       }
 
       if (event.key === 's' && !this.goodByeScreen) {
-       
         this.endRound = true;
-        //console.log('hand Player stand', this.handplayerImages)
-        
-          // for (let index = 0; index < 24; index++) {
-              
-          //   this.handDealerInst.dealerHit();  
-            
-          //   let cards = this.handDealerInst.calculateHandDealer();
-          //   if(cards>17) {  
-          //     this.compareCards();       
-          //     return;       
-          //   };
-            
-          // }
-        this.startDealerRound = true;
-        
-        
+        this.startDealerRound = true; 
       }
       if (event.key === 'n' && !this.goodByeScreen) {
         this.newPlay();
         this.clearScreen();
         clearHandTittle();
-        //this.newPlay();
       }
-      
-      // if (event.key === 'q') {
 
-      //   //this.handDealerInst.dealerHit();
-      //   //console.log('hand Dealer images', this.handDealerImages)
-      // }
+    });
+    this.ctx.canvas.addEventListener('click', (event) => {
+  
+      const x = event.clientX;
+      const y = event.clientY;
+      console.log(x,y)
+      if(this.buttonHitInst.clickButtonHit(x, y, this.canvasSize.width / 6,  this.canvasSize.height - 210, 170, 50)){
+          if(this.endRound) return;
+          this.handPlayerInst.playerHit();
+          this.calculateAll();
+          if(this.playerScoreCards === 21 && this.handPlayerInst.handPlayer.length === 2) {
+            pBlackJack(); 
+            this.endRound = true;
+            this.playerAmount += 100;
+          }
+          else if(this.playerScoreCards > 21) { 
+            dealerWin();
+            this.endRound = true;
+
+            this.playerAmount -= 100;
+            console.log('this.playerScoreCards > 21 YOU LOSE');
+          }
+          else if(this.playerScoreCards === 21 ) { 
+            playerWin();
+            this.endRound = true;
+            this.playerAmount += 100;
+            console.log('this.playerScoreCards === 21 YOU LOSE');
+          }   
+      }
+      else if(this.buttonStandInst.clickStandclass(x, y, this.canvasSize.width / 6,  this.canvasSize.height - 130, 170, 50)) {
+          this.endRound = true;
+          this.startDealerRound = true; 
+      }
+      else if (this.buttonClearInst.clickClearclass(x, y, this.canvasSize.width / 1.3,  this.canvasSize.height - 130, 170, 50)) {
+          this.newPlay();
+          this.clearScreen();
+          clearHandTittle();
+      }
+      else if(this.buttonBetInst.clickBetclass(x, y, this.canvasSize.width / 1.3,  this.canvasSize.height - 210, 170, 50)) {
+        this.loadCoinImage();
+      }
+
     });
   },
   dropDealerCards(){
@@ -280,13 +345,14 @@ const ironhack_blackJack = {
     this.endRound = false;
     this.dealerEndRound =false;
     this.dealerStand = false;
-
+    this.imagebet = undefined;
     this.handPlayerInst.destroyPlayerHand();
     this.handDealerInst.destroyDealerHand();
     this.createDealerScoreCards();
     this.createPlayerScoreCards();
     this.createHandDealerCards();
     this.createHandPlayerCards();
+
 
     this.start();
   },
@@ -296,7 +362,6 @@ const ironhack_blackJack = {
   },
   newPlay() {
     clearInterval(this.intervalId);
-    console.log('estoy limpiando el intervalo this.intervalId');
   },
   gameOver() {
     //Llamamos a la funcion goSectionGoodBye() para cambiar a la pantalla de cierre.
@@ -311,7 +376,7 @@ const ironhack_blackJack = {
       this.clearScreen();
     }, 6000);
     // clearInterval(this.intervalId);
-    console.log('llama desde GAME OVER');
+    
   }
 
 }

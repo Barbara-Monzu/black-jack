@@ -431,6 +431,7 @@ textarea {
         display: none;
         position: relative;
         color :#fff;
+        font-family: 'Cheltenham-Std';
         /* background-color: black;
         background-image: url('../img/Tapiz-Black-JAck.svg');
         background-repeat: no-repeat;
@@ -444,6 +445,7 @@ textarea {
         height: 100vh;
         display: block;
         position: relative; */
+        font-family: 'Cheltenham-Std';
         background-color: red;
     }
     .sect-bye-bye {
@@ -551,27 +553,70 @@ textarea {
         background-size: contain;
         z-index: 0;
     }
-    .sect-bye-bye span {
-            width: 100%;
-            background: -webkit-linear-gradient(blue,black);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            color: transparent; 
-            -webkit-text-stroke: 2px #f5d9ab;   
-            font-size: 6em;
-            position: absolute;
-            left: 0%;
-            top: 25%;
-            transform: translate(-50%, -50%);
-            -webkit-transform: translate(-50%, -50%);
-            line-height: 1.4;
-            text-align: center;
-            font-family: 'Cheltenham-Std';
-            text-align: center;
-            margin: 0 auto;
-    
+    .gameOverNick   {
+        width: 60%;
+        height: 400px;
+        position: absolute;
+        left: 50%;
+        top: 20%;
+        transform: translate(-50%, -50%);
+        -webkit-transform: translate(-50%, -50%);
+        text-align: center;
+        margin: 0 auto;
     }
+    .gameOver   {
+        width: 60%;
+        height: 400px;
+        position: absolute;
+        left: 50%;
+        top: 35%;
+        transform: translate(-50%, -50%);
+        -webkit-transform: translate(-50%, -50%);
+        text-align: center;
+        margin: 0 auto;
+    }
+     
+    #spanNickName {
+        width: 100%;
+        display: block;
+        background: -webkit-linear-gradient(#f7f1b5,black);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        color: transparent;
+        -webkit-text-stroke: 2px #f5d9ab;
+        font-size: 6em;
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        -webkit-transform: translate(-50%, -50%);
+        line-height: 1.4;
+        text-align: center;
+        font-family: 'Cheltenham-Std';
+        text-align: center;
+        margin: 0 auto;
 
+        }
+    .gameOver span:last-child {
+        width: 100%;
+        background: -webkit-linear-gradient(#d40911,black);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        color: transparent; 
+        -webkit-text-stroke: 2px #f5d9ab;   
+        font-size: 6em;
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        -webkit-transform: translate(-50%, -50%);
+        line-height: 1.4;
+        text-align: center;
+        font-family: 'Cheltenham-Std';
+        text-align: center;
+        /* margin: 0 auto; */
+
+    }
 
 
 

@@ -9,10 +9,10 @@ class PlayerScore {
     }
   
     draw( playerScoreCardsInst) {
-      this.ctx.font = '48px roboto';
-      this.ctx.fillStyle =  'red';
-      this.ctx.fillText(playerScoreCardsInst + " hand.", this.pos.x, this.pos.y);
-  
+      this.ctx.font = 'lighter 34px Cheltenham-Std';
+      this.ctx.fillStyle =  'white';
+      this.ctx.fillText(playerScoreCardsInst + " " + `${nickName}` + " hand", this.pos.x, this.pos.y);
+      this.ctx.strokeText(playerScoreCardsInst + " " + `${nickName}` + " hand", this.pos.x, this.pos.y);
     }
   
  

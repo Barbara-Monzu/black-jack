@@ -138,6 +138,56 @@ class HandPlayerCards {
       delete this.handPlayer;
       delete this.handPlayerImages;
     }
-  
-
+     
   }
+
+  class Button {
+    constructor(ctx, posX, posY, width, height, imageButton) {
+        this.ctx = ctx
+        this.pos = {
+          x: posX,
+          y: posY
+        }
+        this.size = {
+          width: width,
+          height: height
+        }
+        this.imageInstance = undefined,
+        this.imageButton = imageButton;
+        this.imagebet = undefined,
+        this.init()
+      }
+      init() {
+        this.imageInstance = new Image()
+        this.imageInstance.src = `img/${this.imageButton}`
+      }
+      draw() {
+        this.ctx.drawImage(this.imageInstance, this.pos.x, this.pos.y, this.size.width, this.size.height)
+      }
+      clickButtonHit(pointX,pointY,rectX,rectY,rectWidth,rectHeight) {
+        if (rectX <= pointX && rectX + rectWidth >= pointX && rectY <= pointY && rectY + rectHeight >= pointY){
+          console.log("estoy clicando al hit")
+          return true;
+        }
+      }
+      clickBetclass(pointX,pointY,rectX,rectY,rectWidth,rectHeight) {
+          if (rectX <= pointX && rectX + rectWidth >= pointX && rectY <= pointY && rectY + rectHeight >= pointY) {
+            console.log("estoy clicando al bet")
+            return true;
+          }
+      }
+      clickStandclass(pointX,pointY,rectX,rectY,rectWidth,rectHeight) {
+          if (rectX <= pointX && rectX + rectWidth >= pointX && rectY <= pointY && rectY + rectHeight >= pointY) {
+            console.log("estoy clicando al stand")
+            return true;
+          }
+      }
+      clickClearclass(pointX,pointY,rectX,rectY,rectWidth,rectHeight) {
+          if (rectX <= pointX && rectX + rectWidth >= pointX && rectY <= pointY && rectY + rectHeight >= pointY) {
+            console.log("estoy clicando al clear")
+            return true;
+          }
+      }
+       
+      
+    }
