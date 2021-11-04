@@ -14,11 +14,11 @@ class HandDealerCards {
       }
       this.handValue = 0;
 
-      this.imageInstanceFirstCard = undefined;
+      // this.imageInstanceFirstCard = undefined;
       
-      this.imageFirstCard = deckCards[1].src;
-      this.valueFirstCard = deckCards[1].value;
-      this.nameFirstCard = deckCards[1].name;
+      // this.imageFirstCard = deckCards[1].src;
+      // this.valueFirstCard = deckCards[1].value;
+      // this.nameFirstCard = deckCards[1].name;
 
 
       this.handDealer =[];
@@ -33,17 +33,31 @@ class HandDealerCards {
       // this.handDealer.push(deckCards[1]);
       // deckCards.splice(1, 1);
 
-      this.handDealerImages.push(new Image());
-      this.handDealerImages[0].src = deckCards[1].src;
+      if(deckCards.length >= 2) {
+        this.handDealerImages.push(new Image());
+        this.handDealerImages[0].src = deckCards[1].src;
 
       // this.handDealer.push(deckCards[1]);
       // deckCards.splice(1, 1);
 
-      if(deckCards.length >= 3) {
+      
+        this.handDealer.push(deckCards[1]);
+        deckCards.splice(1, 1);
+        
+      }
+      else {
+         deckCards = [...deckCopy];
+         suffleDeck(deckCards);
+
+         this.handDealerImages.push(new Image());
+        this.handDealerImages[0].src = deckCards[1].src;
+      
         this.handDealer.push(deckCards[1]);
         deckCards.splice(1, 1);
       }
-      deckCards.length === 0 && (deckCards = [...deckCopy]);
+      
+      
+      
 
     }
   
@@ -82,6 +96,7 @@ class HandDealerCards {
       let extraerCard;
       deckCards.length >= 1 && (extraerCard = deckCards.shift());
       deckCards.length === 0 && (deckCards = [...deckCopy]);
+      console.log(deckCards)
       this.handDealer.push(extraerCard);
       this.handDealerImages.push(new Image());
       this.handDealerImages[this.handDealerImages.length -1].src = extraerCard.src

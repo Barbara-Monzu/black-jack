@@ -14,7 +14,8 @@ const ironhack_blackJack = {
   dealerScoreCardsInst: undefined,
   playerScoreCards: 0,
   playerScoreCardsInst: undefined,
-  playerAmount: 300,
+  INITIAL_PLAYER_AMOUNT: 300,
+  playerAmount: undefined,
   playerAmountTotalInst: undefined,
   handDealerCards: [],
   handDealerCardsInst: undefined,
@@ -31,8 +32,7 @@ const ironhack_blackJack = {
     suffleDeck(deckCards);
     this.createAll();
     this.calculateAll();
-  
-
+    this.playerAmount = this.INITIAL_PLAYER_AMOUNT;
 
     this.setListeners();
     this.start();
@@ -64,17 +64,18 @@ const ironhack_blackJack = {
         // condition && something
         // condition || somethingElse
 
-    
-
         this.startDealerRound && this.dropDealerCards();
       }
+
       this.drawAll();
       this.calculateAll();
-    ///falla funcion GAME OVER POR k esta en el bucle 
+
+      //falla funcion GAME OVER POR k esta en el bucle 
       if (this.playerAmount <= 0) {
         this.gameOver();
       }
-      this.framesCounter ++
+
+      this.framesCounter++;
     }, 1000 / this.FPS)
 
      
@@ -89,7 +90,7 @@ const ironhack_blackJack = {
   },
 
   createBackground() {
-    this.background = new Background(this.ctx, 0, 0, this.canvasSize.width, this.canvasSize.height, "tapete2.jpeg");
+    this.background = new Background(this.ctx, 0, 0, this.canvasSize.width, this.canvasSize.height, "tapete2.jpg");
   },
   createDealerScoreCards() {
     this.dealerScoreCardsInst = new DealerScore(this.ctx, 100, 100);
@@ -107,6 +108,7 @@ const ironhack_blackJack = {
     this.handPlayerInst = new HandPlayerCards(this.ctx, this.canvasSize.width / 2 - 50, this.canvasSize.height - 260, this.canvasSize.height / 8, this.canvasSize.height / 6);
   },
   drawAll() {
+    this.ctx.clearRect(0, 0, this.canvasSize.width, this.canvasSize.height)
     this.drawBackground();
     this.drawDealerScoreCards();
     this.drawPlayerScoreCards();
@@ -140,6 +142,11 @@ const ironhack_blackJack = {
     
     this.playerScoreCards = this.handPlayerInst.calculateHandPlayer();
     this.dealerScoreCards = this.handDealerInst.calculateHandDealer();
+    if(this.playerScoreCards === 21 && this.handPlayerInst.handPlayer.length === 2 && !this.endRound) {
+      pBlackJack(); 
+      this.endRound = true;
+      this.playerAmount += 100;
+    }
     this.endRound && !this.dealerEndRound && this.compareCards();
     
   },
@@ -195,7 +202,7 @@ const ironhack_blackJack = {
   setListeners() { //Aqui debemos poner los eventos onClick de los botones del canvas
     document.addEventListener('keydown', (event) => { //evento 'hit pedir carta'
 
-      if (event.key === ' ') {
+      if (event.key === ' ' && !this.goodByeScreen) {
         if(this.endRound) return;
         this.handPlayerInst.playerHit();
         this.calculateAll();
@@ -222,7 +229,7 @@ const ironhack_blackJack = {
          
       }
 
-      if (event.key === 's') {
+      if (event.key === 's' && !this.goodByeScreen) {
        
         this.endRound = true;
         //console.log('hand Player stand', this.handplayerImages)
@@ -242,7 +249,8 @@ const ironhack_blackJack = {
         
         
       }
-      if (event.key === 'n') {
+      if (event.key === 'n' && !this.goodByeScreen) {
+        this.newPlay();
         this.clearScreen();
         clearHandTittle();
         //this.newPlay();
@@ -253,9 +261,6 @@ const ironhack_blackJack = {
       //   //this.handDealerInst.dealerHit();
       //   //console.log('hand Dealer images', this.handDealerImages)
       // }
-
-
-
     });
   },
   dropDealerCards(){
@@ -271,7 +276,6 @@ const ironhack_blackJack = {
   clearScreen() {
     // this.ctx.clearRect(0, 0, this.canvasSize.width, this.canvasSize.height);
     //this.init();
-    this.newPlay();
     suffleDeck(deckCards);
     this.endRound = false;
     this.dealerEndRound =false;
@@ -296,8 +300,17 @@ const ironhack_blackJack = {
   },
   gameOver() {
     //Llamamos a la funcion goSectionGoodBye() para cambiar a la pantalla de cierre.
+    this.goodByeScreen = true;
     goSectionGoodBye();
-    clearInterval(this.intervalId);
+    this.newPlay();
+    setTimeout(() => {
+      goSectionLanding();
+      this.goodByeScreen = false;
+      this.playerAmount = this.INITIAL_PLAYER_AMOUNT;
+      deckCards = [...deckCopy];
+      this.clearScreen();
+    }, 6000);
+    // clearInterval(this.intervalId);
     console.log('llama desde GAME OVER');
   }
 

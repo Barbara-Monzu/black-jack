@@ -1,4 +1,4 @@
-const deckCards = [
+let deckCards = [
     {
         name: '1 of Hearts',
         value: 11,

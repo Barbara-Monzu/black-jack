@@ -124,24 +124,16 @@ function finalAnimation(){
        
     //On complete "final animation vuelve a la pantalla landing"
      
-    let intervalId = setTimeout(() => {
-        goSectionLanding(); 
-        
-    }, 6000);  
+}
 
-    function goSectionLanding(){
+function goSectionLanding(){
 
-        TweenMax.set(content,{opacity:0,display:"none"});
-         
-        gsap.timeline()
-            .to(content3,0.3, {opacity:0,display:"none"})
-            .to(content,1, {opacity:1,display:"block"});
-            // window.clearTimeout(intervalId);
-    }
-    
-    
-    
+    TweenMax.set(content,{opacity:0,display:"none"});
      
+    gsap.timeline()
+        .to(content3,0.3, {opacity:0,display:"none"})
+        .to(content,1, {opacity:1,display:"block"});
+        // window.clearTimeout(intervalId);
 }
 //Formularion NickName del player- capturamos el nickName y con submit hacemos deaparecer el formulario almacenando la variable Nickname
 function clearHandTittle() { console.log('SETER Titulo');
@@ -226,7 +218,8 @@ const splitText = (selector) => {
         TweenMax.set(dealerBj,{opacity:0,display:"none"});
         
         gsap.timeline()
-            .to(dealerBj,1, {opacity:1,display:"block"});
+            .to(dealerBj,1, {opacity:1,display:"block"})
+            .to(dealerBj,1, {delay:2, opacity:0,display:"none"});
         //,onComplete: startTAbleGame()
     
     }
@@ -235,7 +228,8 @@ const splitText = (selector) => {
         TweenMax.set(playerBj,{opacity:0,display:"none"});
             
         gsap.timeline()
-            .to(playerBj,1, {opacity:1,display:"block"});
+            .to(playerBj,1, {opacity:1,display:"block"})
+            .to(playerBj,1, {delay:2, opacity:0,display:"none"});
         //,onComplete: startTAbleGame()
         
     }
@@ -244,7 +238,8 @@ const splitText = (selector) => {
         TweenMax.set(win,{opacity:0,display:"none"});
         
         gsap.timeline()
-            .to(win,1, {opacity:1,display:"block"});
+            .to(win,1, {opacity:1,display:"block"})
+            .to(win,1, {delay:2, opacity:0,display:"none"});
         //,onComplete: startTAbleGame()
     
     }
@@ -253,7 +248,8 @@ const splitText = (selector) => {
         TweenMax.set(loose,{opacity:0,display:"none"});
          
         gsap.timeline()
-            .to(loose,1, {opacity:1,display:"block"});
+            .to(loose,1, {opacity:1,display:"block"})
+            .to(loose,1, {delay:2, opacity:0,display:"none"});
         //,onComplete: startTAbleGame()
         
     }
@@ -262,7 +258,8 @@ const splitText = (selector) => {
         TweenMax.set(tie,{opacity:0,display:"none"});
          
         gsap.timeline()
-            .to(tie,1, {opacity:1,display:"block"});
+            .to(tie,1, {opacity:1,display:"block"})
+            .to(tie,1, {delay:2, opacity:0,display:"none"});
         //,onComplete: startTAbleGame()
         
     }

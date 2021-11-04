@@ -14,22 +14,22 @@ class HandPlayerCards {
       }
       this.handValue = 0;
 
-      this.imageInstanceFirstCard = undefined;
-      this.imageFirstCard = deckCards[0].src;
-      this.valueFirstCard = deckCards[0].value;
-      this.nameFirstCard = deckCards[0].name;
+      // this.imageInstanceFirstCard = undefined;
+      // this.imageFirstCard = deckCards[0].src;
+      // this.valueFirstCard = deckCards[0].value;
+      // this.nameFirstCard = deckCards[0].name;
 
-      this.imageInstanceSecondCard = undefined;
-      this.imageSecondCard = deckCards[2].src;
-      this.valueSecondCard = deckCards[2].value;
+      // this.imageInstanceSecondCard = undefined;
+      // this.imageSecondCard = deckCards[2].src;
+      // this.valueSecondCard = deckCards[2].value;
       //console.log(this.valueFirstCard)
       //console.log(this.valueSecondCard)
-      this.nameSecondCard = deckCards[2].name;
+      // this.nameSecondCard = deckCards[2].name;
 
-      this.imageNewCard = undefined;
-      this.imageNewCard3 = deckCards[0].src;
-      this.valueNewCard = deckCards[0].value;
-      this.nameNewCard = deckCards[0].name;
+      // this.imageNewCard = undefined;
+      // this.imageNewCard3 = deckCards[0].src;
+      // this.valueNewCard = deckCards[0].value;
+      // this.nameNewCard = deckCards[0].name;
 
       this.handPlayer =[];
 
@@ -46,18 +46,31 @@ class HandPlayerCards {
       // this.imageInstanceSecondCard = new Image();
       // this.imageInstanceSecondCard.src = this.imageSecondCard;
       
-      this.handPlayerImages.push(new Image());
-      this.handPlayerImages[0].src = deckCards[0].src;
-      this.handPlayerImages.push(new Image());
-      this.handPlayerImages[1].src = deckCards[2].src;
-
       if(deckCards.length >= 3) {
+        this.handPlayerImages.push(new Image());
+        this.handPlayerImages[0].src = deckCards[0].src;
+        this.handPlayerImages.push(new Image());
+        this.handPlayerImages[1].src = deckCards[2].src;
+
         this.handPlayer.push(deckCards[0]);
         this.handPlayer.push(deckCards[2]);
         deckCards.splice(2, 1);
         deckCards.splice(0, 1);
       }
-      deckCards.length === 0 && (deckCards = [...deckCopy]);
+      else {
+        deckCards = [...deckCopy];
+        suffleDeck(deckCards);
+
+        this.handPlayerImages.push(new Image());
+        this.handPlayerImages[0].src = deckCards[0].src;
+        this.handPlayerImages.push(new Image());
+        this.handPlayerImages[1].src = deckCards[2].src;
+
+        this.handPlayer.push(deckCards[0]);
+        this.handPlayer.push(deckCards[2]);
+        deckCards.splice(2, 1);
+        deckCards.splice(0, 1);
+      }
     }
      
   
@@ -105,6 +118,7 @@ class HandPlayerCards {
       let extraerCard;
       deckCards.length >= 1 && (extraerCard = deckCards.shift());
       deckCards.length === 0 && (deckCards = [...deckCopy]);
+      console.log(deckCards)
       this.handPlayer.push(extraerCard);
       this.handPlayerImages.push(new Image());
       this.handPlayerImages[this.handPlayerImages.length -1].src = extraerCard.src
