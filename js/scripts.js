@@ -125,7 +125,7 @@ function finalAnimation(){
      
 }
 function finalAnimation2(){
-    
+    gameOverSound();
     //Añadimos un setTimeout oara que despues de que termine la animacion final o transcurridos X segundos llame a la funcion "goSectionLanding()"" para regresar a la pantalla principal
     const gameOver = document.getElementById('gameOverId');
     let S = [{scale:1.1},{scale:1.02},{scale:1.2}]
@@ -304,13 +304,23 @@ const bj = document.getElementById('bj');
             .to(bj,0.3, {opacity:0,display:"none"})
             .to(bj,3, {opacity:1,display:"block"});
  }
-
- function carcajadaFinal (fuente) {
-    const sonido = document.createElement("audio");
-    sonido.src = fuente;
-    sonido.setAttribute("preload", "auto");
-    sonido.setAttribute("controls", "none");
-    sonido.style.display = "none"; // <-- oculto
-    document.body.appendChild(sonido);
-    return sonido;
+  
+let bravo = new Audio('bravoSound.mp3');
+bravo.setAttribute("preload", "auto");
+function bravoWinHand () {
+    bravo.play();
 };
+
+let loseAudio = new Audio('loseAudio.mp3');
+loseAudio.setAttribute("preload", "auto");
+function loserHand() {
+    loseAudio.play();
+};
+
+let evilLaugh = new Audio('evilLaugh2.mp3');
+evilLaugh.setAttribute("preload", "auto");
+function gameOverSound() {
+    evilLaugh.play();
+};
+
+ 

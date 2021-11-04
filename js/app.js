@@ -191,7 +191,7 @@ const ironhack_blackJack = {
     this.playerScoreCards = this.handPlayerInst.calculateHandPlayer();
     this.dealerScoreCards = this.handDealerInst.calculateHandDealer();
     if(this.playerScoreCards === 21 && this.handPlayerInst.handPlayer.length === 2 && !this.endRound) {
-      pBlackJack(); 
+      pBlackJack();  bravoWinHand(); 
       this.endRound = true;
       this.playerAmount += 100;
     }
@@ -205,25 +205,25 @@ const ironhack_blackJack = {
     //   this.playerAmount -= 100;
     // }
     if(this.handDealerInst.handDealer.length === 2 && this.dealerScoreCards === 21 ) { 
-      dBlackJack();
+      dBlackJack();loserHand();
       this.dealerEndRound = true; 
       this.playerAmount -= 100;
       console.log('this.handDealerInst.handDealer.length - 1 === 2 && this.dealerScoreCards === 21 YOU LOSE');
     }
     else if(this.playerScoreCards === 21 && this.handDealerInst.handDealer.length === 2 && this.dealerScoreCards === 21 ) { 
-      dBlackJack();
+      dBlackJack(); loserHand();
       this.dealerEndRound = true; 
       this.playerAmount -= 100;
       console.log('this.playerScoreCards === 21 && this.handDealerInst.handDealer.length - 1 === 2 && this.dealerScoreCards === 21 YOU LOSE');
     } 
     else if(this.dealerScoreCards === 21 ){ 
-      dealerWin();
+      dealerWin(); loserHand();
       this.dealerEndRound = true;
       this.playerAmount -= 100;
       console.log('dealerScoreCards === 21 YOU LOSE');
     }   
     else if(this.dealerScoreCards>21 ){ 
-      playerWin(); 
+      playerWin(); bravoWinHand (); 
       this.dealerEndRound = true;
       this.playerAmount += 100;
       console.log('dealerScoreCards > 21 PLAYER WIN');
@@ -234,13 +234,13 @@ const ironhack_blackJack = {
        console.log('this.dealerScoreCards === this.playerScoreCards EMPATE')
     }
     else if(this.playerScoreCards < 21 && this.dealerScoreCards < 21 && this.dealerScoreCards > this.playerScoreCards && this.dealerStand){
-      dealerWin();
+      dealerWin(); loserHand();
       this.dealerEndRound = true;
       this.playerAmount -= 100;
       console.log('this.dealerScoreCards <21 && this.dealerScoreCards > this.playerScoreCards')
       }
     else if(this.playerScoreCards < 21 && this.dealerScoreCards < 21 && this.dealerScoreCards < this.playerScoreCards && this.dealerStand){
-      playerWin();
+      playerWin(); bravoWinHand();
       this.dealerEndRound = true;
       this.playerAmount += 100;
       console.log(this.dealerScoreCards, this.playerScoreCards, 'this.dealerScoreCards <21 && this.dealerScoreCards > this.playerScoreCards')
@@ -255,19 +255,19 @@ const ironhack_blackJack = {
         this.handPlayerInst.playerHit();
         this.calculateAll();
         if(this.playerScoreCards === 21 && this.handPlayerInst.handPlayer.length === 2) {
-          pBlackJack(); 
+          pBlackJack(); loserHand();
           this.endRound = true;
           this.playerAmount += 100;
         }
         else if(this.playerScoreCards > 21) { 
-          dealerWin();
+          dealerWin(); loserHand();
           this.endRound = true;
 
           this.playerAmount -= 100;
           console.log('this.playerScoreCards > 21 YOU LOSE');
         }
         else if(this.playerScoreCards === 21 ) { 
-          playerWin();
+          playerWin(); bravoWinHand();
           this.endRound = true;
           this.playerAmount += 100;
           console.log('this.playerScoreCards === 21 YOU LOSE');
@@ -374,7 +374,7 @@ const ironhack_blackJack = {
       this.playerAmount = this.INITIAL_PLAYER_AMOUNT;
       deckCards = [...deckCopy];
       this.clearScreen();
-    }, 6000);
+    }, 9000);
     // clearInterval(this.intervalId);
     
   }
