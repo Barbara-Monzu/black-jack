@@ -1,5 +1,4 @@
 
-// const buttons = document.querySelectorAll('.btn');
 const btnLess = document.getElementById('btnLess');
 const btnOver = document.getElementById('btnOver');
 const btnStart = document.getElementById('btnStart');
@@ -10,23 +9,19 @@ const content2 = document.getElementById('sectionGame');
 const content3 = document.getElementById('sectionGood-bye');
  
  
-   
-  
     // Agregamos un addevent lisener para escucharclick btn "yearsLess", si eres mayor de edad. 
     document.getElementById('btnLess').addEventListener('click', event => {
-        //console.log('Escucho el evento btnLess');
         yearsLess();
     });
     document.getElementById('btnOver').addEventListener('click', event => {
-        //console.log('Escucho el evento btnOver');
        yearsOver();
     });
     document.getElementById('btnStart').addEventListener('click', event => {
-        //console.log('Escucho el evento startGame');
         startGame();
+        barajar();
     });
     
-    function yearsLess() { //console.log('Escucho el evento btnLess');
+    function yearsLess() {
         //Eliminamos btn "YearsLess y Btn YearsOver" mediante las propiedades opacity y display block
         btnLess.style.display = "none"; 
         btnLess.style.opacity = "0";
@@ -51,20 +46,19 @@ const content3 = document.getElementById('sectionGood-bye');
         
     }
     // Agregamos un addevent lisener para escucharclick btn "yearsOver", si eres mayor de edad. 
-    function yearsOver(){ console.log('Escucho el evento btnOver');
+    function yearsOver(){ 
         //Eliminamos "btn YearsLess y Btn YearsOver" mediante las propiedades opacity y display block
         btnLess.style.display = "none"; 
         btnLess.style.opacity = "0";
         btnOver.style.display = "none"; 
         btnOver.style.opacity = "0";
 
-        //Mostramos btn "startGame" mediante las propiedades opacity y display block
         btnStart.style.display = "block"; 
         btnStart.style.opacity = "1";
 
     }
     // Agregamos un addevent lisener para escucharclick btn "start-game" iniciar partida. 
-    function startGame() { //console.log('Escucho el evento startGame');
+    function startGame() { 
     //Llamamos a la funcion "goSectionCanvas()" para cambiar a la pantalla de juego y iniciar "ironhack_BlackJAck.init()" mediante el callback de la animacion "goSectionCanvas()""
 
         goSectionCanvas();
@@ -75,7 +69,6 @@ const content3 = document.getElementById('sectionGood-bye');
         btnOver.style.display = "block"; 
         btnOver.style.opacity = "1";
 
-        //Mostramos mensaje "contYearsLess" mediante las propiedades opacity y display block
         btnStart.style.display = "none"; 
         btnStart.style.opacity = "0";
     }
@@ -91,11 +84,6 @@ function goSectionCanvas(){
     gsap.timeline()
         .to(content,0.3, {opacity:0,display:"none"})
         .to(content2,1, {opacity:1,display:"block"});
-    //,onComplete: startTAbleGame()
-    //Descomentarara acceder a la pagina de cierre despues de 10 minutos 
-    // setTimeout(() => {
-    //     goSectionGoodBye();
-    // }, 100000);
 }
 //Animacion Sections Good Bye
 function goSectionGoodBye(){
@@ -119,9 +107,7 @@ function finalAnimation(){
             .to(nickGameOver,1,{delay:0.1, autoAlpha:1, scale:1,ease:Elastic.easeOut.config(1.1, .8)}) 
             .to(nickGameOver,0.5,{bezier:{values:S}, ease:Elastic.easeOut})
             .to(nickGameOver,1,{delay:0.5, autoAlpha:1, scale:1,ease:Elastic.easeOut.config(.8, 1.3)})
-            .to(nickGameOver,1,{delay:0.5, autoAlpha:1, scale:1,ease:Elastic.easeOut.config(1.3, 1), delay:1, onComplete:finalAnimation2()})
-      
-    //On complete "final animation vuelve a la pantalla landing"
+            .to(nickGameOver,1,{delay:0.5, autoAlpha:1, scale:1,ease:Elastic.easeOut.config(1.3, 1), delay:1, onComplete:finalAnimation2()});
      
 }
 function finalAnimation2(){
@@ -138,8 +124,6 @@ function finalAnimation2(){
             .to(gameOver,0.5,{bezier:{values:S}, ease:Elastic.easeOut})
             .to(gameOver,1,{delay:0.5, autoAlpha:1, scale:1,ease:Elastic.easeOut.config(.8, 1.3)})
             .to(gameOver,1,{delay:0.5, autoAlpha:1, scale:1,ease:Elastic.easeOut.config(1.3, 1)});
-       
-    //On complete "final animation vuelve a la pantalla landing"
      
 }
 
@@ -150,10 +134,9 @@ function goSectionLanding(){
     gsap.timeline()
         .to(content3,0.3, {opacity:0,display:"none"})
         .to(content,1, {opacity:1,display:"block"});
-        // window.clearTimeout(intervalId);
 }
 //Formularion NickName del player- capturamos el nickName y con submit hacemos deaparecer el formulario almacenando la variable Nickname
-function clearHandTittle() { console.log('SETER Titulo');
+function clearHandTittle() { 
     if(win.style.display === 'block' ){
         TweenMax.set(win,{opacity:1,display:"block"});
         gsap.timeline().to(win, 0.3 ,{opacity:0,display:"none"});
@@ -208,9 +191,8 @@ const splitText = (selector) => {
   
       charsArray.push(charContainer);
     });
-    // remove current text
+    
     elem.innerHTML = "";
-    // append new structure
     elem.appendChild(charsContainer);
   
     return charsArray;
@@ -223,7 +205,7 @@ const splitText = (selector) => {
       y: 100,
       opacity: 0,
       stagger: 0.1,
-      delay: 1 
+      delay: 1.5 
     });
   };
   
@@ -243,8 +225,6 @@ const splitText = (selector) => {
         gsap.timeline()
             .to(dealerBj,1, {opacity:1,display:"block"})
             .to(dealerBj,1, {delay:2, opacity:0,display:"none"});
-        //,onComplete: startTAbleGame()
-    
     }
     function pBlackJack(){
     
@@ -252,9 +232,7 @@ const splitText = (selector) => {
             
         gsap.timeline()
             .to(playerBj,1, {opacity:1,display:"block"})
-            .to(playerBj,1, {delay:2, opacity:0, display:"none"});
-        //,onComplete: startTAbleGame()
-        
+            .to(playerBj,1, {delay:2, opacity:0, display:"none"});    
     }
     function playerWin(){
     
@@ -263,8 +241,6 @@ const splitText = (selector) => {
         gsap.timeline()
             .to(win,1, {opacity:1,display:"block"})
             .to(win,1, {delay:2, opacity:0,display:"none"});
-        //,onComplete: startTAbleGame()
-    
     }
     function dealerWin(){
     
@@ -273,7 +249,6 @@ const splitText = (selector) => {
         gsap.timeline()
             .to(loose,1, {opacity:1,display:"block"})
             .to(loose,1, {delay:2, opacity:0,display:"none"});
-        //,onComplete: startTAbleGame()
         
     }
     function empate(){
@@ -283,7 +258,6 @@ const splitText = (selector) => {
         gsap.timeline()
             .to(tie,1, {opacity:1,display:"block"})
             .to(tie,1, {delay:2, opacity:0,display:"none"});
-        //,onComplete: startTAbleGame()
         
     }
   
@@ -292,10 +266,6 @@ var fondoRotacion = document.getElementById('rotacion-fondo');
 TweenMax.to(fondoRotacion, 75, {rotation:"360", ease:Linear.easeNone, repeat:-1});
 
 //Llamada a cargar/ ejecutar App ironhack_blackJack 
-//ironhack_blackJack.init(); ////
-// function startTAbleGame(){
-//     ironhack_blackJack.init();
-// }
 const bj = document.getElementById('bj');
  function titularBJ(){
     // TweenMax.set(bj,{opacity:0,display:"none"});
@@ -323,10 +293,14 @@ function gameOverSound() {
     evilLaugh.play();
 };
 
-let cartasSound = new Audio('Barajar-repartir-cartas');
-cartasSound.setAttribute("preload", "auto");
-function cartasSounds() {
-    cartasSound.play();
+// let cartasSound = new Audio('Barajar-repartir-cartas');
+// cartasSound.setAttribute("preload", "auto");
+// function cartasSounds() {
+//     cartasSound.play();
+// };
+let baraja = new Audio('barajar.mp3');
+baraja.setAttribute("preload", "auto");
+function barajar() {
+    baraja.play();
 };
-
  

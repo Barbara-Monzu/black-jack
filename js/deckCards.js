@@ -374,6 +374,6 @@ function suffleDeck(deckCards){
       deckCards[i] = deckCards[j];
       deckCards[j] = temp;
     }
-    //console.log(deckCards);
+
 }
 //suffleDeck(deckCards);

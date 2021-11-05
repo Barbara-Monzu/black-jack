@@ -5,7 +5,7 @@ class PlayerAmount {
         x: posX,
         y: posY
       }
-      //this.playerAmount = 1000;
+
     }
   
     draw(playerAmountTotalInst) {
@@ -16,9 +16,6 @@ class PlayerAmount {
      
     }
   
-    // sumPlayerCards(playerAmountTotalInst) {
-    //   this.playerAmount += playerAmountTotalInst; 
-    // }
   }
 
   class Coins {
